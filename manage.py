@@ -1,11 +1,12 @@
 from datetime import datetime
 
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user
 
+from main import main as main_blueprint
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
@@ -42,10 +43,7 @@ class MyModelView(ModelView):
 admin = Admin(app)
 admin.add_view(MyModelView(User, db.session))
 
-
-@app.route('/')
-def main():
-    return "hello world"
+app.register_blueprint(main_blueprint, url_prefix='/')
 
 
 @app.route('/login')

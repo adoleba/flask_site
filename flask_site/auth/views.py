@@ -21,9 +21,17 @@ def logout():
 @auth.route('/signup', methods=["GET", "POST"])
 def signup():
     form = SignupForm()
-    if form.validate_on_submit():
-        user = User()
-        db.session.add(user)
-        db.session.commit()
+    if request.method == 'POST':
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+
+        if form.validate_on_submit():
+            user = User(email=email, username=username, password=password)
+            db.session.add(user)
+            db.session.commit()
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html', form=form)
+
+
+

@@ -1,13 +1,38 @@
 {% extends "base.html" %}
 
 {% block title %}
-My blog - welcome
+My blog - log in
 {% endblock %}
 
-
 {% block content %}
+    <section class="wow fadeIn bg-light-gray">
+        <div class="container">
+            <form action="" method="post">
+                {{ form.csrf_token }}
+                {{ form.hidden_tag()}}
+                <div class="row">
+                    <div class="col-md-6 wow fadeIn center-col">
+                        <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
+                            <div class="text-extra-dark-gray alt-font text-large font-weight-600 margin-30px-bottom">
+                                Log in
+                            </div>
+                            <div>
+                                Username:
+                                <div class="input-bg">
+                                    {{ form.username }}
+                                </div>
+                                Password:
+                                <div class="input-bg">
+                                    {{ form.password }}
+                                </div>
 
-    <h1>Test login</h1>
-    <p>test 2 login</p>
+                                <button type="submit" class="btn btn-small border-radius-4 btn-black">Log In</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
 
 {% endblock %}

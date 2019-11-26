@@ -1,14 +1,16 @@
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
+from flask_login import login_user
 
 from flask_site import db
-from flask_site.auth.forms import SignupForm
+from flask_site.auth.forms import SignupForm, LoginForm
 from flask_site.users.models import User
 from . import auth
 
 
-@auth.route('/login')
+@auth.route('/login', methods=["GET", "POST"])
 def login():
-    return render_template('auth/login.html')
+    form = LoginForm()
+    return render_template("auth/login.html", form=form)
 
 
 @auth.route('/logout')

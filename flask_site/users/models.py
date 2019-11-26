@@ -8,6 +8,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64))
     email = db.Column(db.String(120))
+    password = db.Column(db.String(128))
     about = db.Column(db.String(10000))
     created = db.Column(db.DateTime, default=datetime.utcnow())
 

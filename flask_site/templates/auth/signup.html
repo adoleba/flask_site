@@ -1,13 +1,45 @@
 {% extends "base.html" %}
 
 {% block title %}
-My blog - welcome
+App_flask - Register
 {% endblock %}
 
-
 {% block content %}
+    <section class="wow fadeIn bg-light-gray">
+    <div class="container">
+                <form action="" method="post">
+                    {{ form.csrf_token }}
+                    {{ form.hidden_tag()}}
+                    <div class="row">
+                        <div class="col-md-6 wow fadeIn center-col">
+                            <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
+                                <div class="text-extra-dark-gray alt-font text-large font-weight-600 margin-30px-bottom">Create an account</div>
+                                <div>
+                                     <div id="success-contact-form-3" class="no-margin-lr"></div>
+                                    Username:
+                                    <div class="input-bg">
+                                        {{ form.username }}
+                                    </div>
+                                    Email:
+                                    <div class="input-bg">
+                                        {{ form.email }}
+                                    </div>
+                                    Password:
+                                    <div class="input-bg">
+                                        {{ form.password }}
+                                    </div>
+                                    Please repeat password:
+                                    <div class="input-bg">
+                                        {{ form.password2 }}
+                                    </div>
 
-    <h1>Test login</h1>
-    <p>test 2 login</p>
+                                    <button type="submit" class="btn btn-small border-radius-4 btn-black">Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </section>
 
 {% endblock %}

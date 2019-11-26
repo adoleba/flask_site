@@ -13,6 +13,15 @@ My blog - log in
                 <div class="row">
                     <div class="col-md-6 wow fadeIn center-col">
                         <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
+                            {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                            {% endwith %}
+
+
                             <div class="text-extra-dark-gray alt-font text-large font-weight-600 margin-30px-bottom">
                                 Log in
                             </div>

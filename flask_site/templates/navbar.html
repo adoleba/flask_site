@@ -25,17 +25,22 @@
                             <a href="#">Contact</a>
                         </li>
 
+                        {% if current_user.is_authenticated %}
+                            <li class="dropdown megamenu-fw">
+                                <a href="/admin">Admin</a>
+                            </li>
+                            <li class="dropdown megamenu-fw">
+                                <a href="{{ url_for('auth.logout') }}">Logout</a>
+                            </li>
 
-                        <li class="dropdown megamenu-fw">
-                            <a href="{{ url_for('auth.login') }}">Login</a>
-                        </li>
-
-                        <li class="dropdown megamenu-fw">
-                            <a href="{{ url_for('auth.logout') }}">Logout</a>
-                        </li>
-                        <li class="dropdown megamenu-fw">
-                            <a href="{{ url_for('auth.signup') }}">Sign up</a>
-                        </li>
+                        {% else %}
+                            <li class="dropdown megamenu-fw">
+                                <a href="{{ url_for('auth.login') }}">Login</a>
+                            </li>
+                            <li class="dropdown megamenu-fw">
+                                <a href="{{ url_for('auth.signup') }}">Sign up</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

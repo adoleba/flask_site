@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user
 
 from flask_site import db
@@ -26,9 +26,19 @@ def signup():
         username = request.form['username']
         password = request.form['password']
 
+        user_verify_email = User.query.filter_by(email=email).first()
+        if user_verify_email:
+            flash('Email address already exists')
+            return redirect(url_for('auth.signup'))
+
+        user_verify_username = User.query.filter_by(username=username).first()
+        if user_verify_username:
+            flash('Username already exists')
+            return redirect(url_for('auth.signup'))
+
         if form.validate_on_submit():
-            user = User(email=email, username=username, password=password)
-            db.session.add(user)
+            new_user = User(email=email, username=username, password=password)
+            db.session.add(new_user)
             db.session.commit()
         return redirect(url_for('auth.login'))
     return render_template('auth/signup.html', form=form)

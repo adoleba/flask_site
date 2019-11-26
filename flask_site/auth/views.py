@@ -34,4 +34,8 @@ def signup():
     return render_template('auth/signup.html', form=form)
 
 
+@auth.route('/registered')
+def registered():
+    return render_template('auth/registered.html')
+
 

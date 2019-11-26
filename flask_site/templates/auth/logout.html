@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 
 {% block title %}
-My blog - welcome
+App_flask - Register
 {% endblock %}
 
-
 {% block content %}
-
-    <h1>Test login</h1>
-    <p>test 2 login</p>
+    <section class="wow fadeIn bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 wow fadeIn center-col">
+                    <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
+                        <div class="text-extra-dark-gray text-center alt-font text-large font-weight-600 margin-30px-bottom">
+                            <p>You was successfully logged out.</p>
+                            <a href="{{ url_for('main.main') }}">GO TO HOMEPAGE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

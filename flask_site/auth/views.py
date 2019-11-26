@@ -21,6 +21,8 @@ def login():
         if not user or not check_password_hash(user.password, password):
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login'))
+
+        login_user(user)
         return redirect(url_for('users.user_profile'))
 
     return render_template("auth/login.html", form=form)

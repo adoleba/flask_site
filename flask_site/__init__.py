@@ -11,9 +11,14 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
-    app.config['SECRET_KEY'] = config.SECRET_KEY
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS
+
+    if app.config['ENV'] == 'production':
+        app.config.from_object(config.ProductionConfig)
+    elif app.config['ENV'] == 'testing':
+        app.config.from_object(config.TestingConfig)
+    else:
+        app.config.from_object(config.DevelopmentConfig)
+
     db.init_app(app)
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

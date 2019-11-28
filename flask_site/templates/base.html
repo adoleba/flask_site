@@ -1,0 +1,86 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% block styles %}
+
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/et-line-icons.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/themify-icons.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper.min.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/justified-gallery.min.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/revolution/settings.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/revolution/layers.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/revolution/navigation.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/bootsnav.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
+        {% endblock %}
+
+    </head>
+    <body>
+
+    {% block header %}
+        {% include 'header.html' %}
+    {% endblock %}
+
+
+    {% block content %}
+    {% endblock %}
+
+
+    {% block footer %}
+        {% include 'footer.html' %}
+    {% endblock %}
+
+    {% block scripts %}
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-migrate-3.0.1.min.js"
+            integrity="sha256-F0O1TmEa4I8N24nY0bya59eP6svWcshqX1uzwaWC4F4=" crossorigin="anonymous"></script>
+
+        <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/skrollr.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/smooth-scroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.appear.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootsnav.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/wow.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/page-scroll.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/swiper.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.count-to.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.stellar.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/imagesloaded.pkgd.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/classie.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/hamburger-menu.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/counter.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.fitvids.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/equalize.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/skill.bars.jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/justified-gallery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/jquery.easypiechart.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/instafeed.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/retina.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/revolution/jquery.themepunch.tools.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/revolution/jquery.themepunch.revolution.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/company_site.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+        {% endblock %}
+    </body>
+</html>

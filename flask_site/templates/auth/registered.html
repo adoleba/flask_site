@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+App_flask - Register
+{% endblock %}
+
+{% block content %}
+    <section class="wow fadeIn bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 wow fadeIn center-col">
+                    <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
+                        <div class="text-extra-dark-gray text-center alt-font text-large font-weight-600 margin-30px-bottom">
+                            <p>Your account was created successfully.</p>
+                            <p>Now you can
+                                <a href="{{ url_for('auth.login') }}">LOGIN</a>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

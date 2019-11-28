@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-My blog - log in
+App_flask - Register
 {% endblock %}
 
 {% block content %}
@@ -16,26 +16,34 @@ My blog - log in
                             {% with messages = get_flashed_messages() %}
                             {% if messages %}
                                 <div class="alert alert-danger alert-dismissable">
-                                    {{ messages[0] }}
+                                    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>
                                 </div>
                             {% endif %}
                             {% endwith %}
 
 
                             <div class="text-extra-dark-gray alt-font text-large font-weight-600 margin-30px-bottom">
-                                Log in
+                                Create an account
                             </div>
                             <div>
                                 Username:
                                 <div class="input-bg">
                                     {{ form.username }}
                                 </div>
+                                Email:
+                                <div class="input-bg">
+                                    {{ form.email }}
+                                </div>
                                 Password:
                                 <div class="input-bg">
                                     {{ form.password }}
                                 </div>
+                                Please repeat password:
+                                <div class="input-bg">
+                                    {{ form.password2 }}
+                                </div>
 
-                                <button type="submit" class="btn btn-small border-radius-4 btn-black">Log In</button>
+                                <button type="submit" class="btn btn-small border-radius-4 btn-black">Register</button>
                             </div>
                         </div>
                     </div>

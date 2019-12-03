@@ -19,7 +19,7 @@ My blog
                         <div class="display-table-cell vertical-align-middle breadcrumb text-small alt-font">
                             <ul class="xs-text-center text-uppercase">
                                 <li><a href="#" class="text-dark-gray">{{ post.timestamp.strftime('%d.%m.%Y') }}</a></li>
-                                <li><span class="text-dark-gray">by <a href="#">Jay Benjamin</a></span></li>
+                                <li><span class="text-dark-gray">by <a href="#">{{post.user.username}}</a></span></li>
                             </ul>
                         </div>
                     </div>
@@ -51,7 +51,7 @@ My blog
                                 <img src="http://placehold.it/149x149" class="img-circle width-100px" alt=""/>
                             </div>
                             <div class="padding-40px-left display-table-cell vertical-align-top last-paragraph-no-margin xs-no-padding-left xs-display-block xs-text-center">
-                                <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 margin-10px-bottom display-inline-block text-small">Alexander Harvard</a>
+                                <a href="#" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 margin-10px-bottom display-inline-block text-small">{{post.user.firstname}} {{post.user.lastname}}</a>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
                                 <a class="btn btn-very-small btn-black margin-20px-top">All author posts</a>
                             </div>

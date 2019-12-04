@@ -22,7 +22,7 @@ My blog
         <div class="container">
             <div class="row equalize xs-equalize-auto">
 
-            {% for post in user.posts %}
+            {% for post in user_posts %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 margin-30px-bottom xs-text-center wow fadeInUp">
                     <div class="blog-post bg-light-gray inner-match-height">
                         <div class="post-details padding-40px-all sm-padding-20px-all">
@@ -33,13 +33,15 @@ My blog
                             <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                             <div class="author">
                                 <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">
-                                    by <a href="#" class="text-medium-gray">{{post.user.username}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                    {{ post.timestamp.strftime('%d.%m.%Y') }}</span>
+                                    by <a href="{{ url_for('users.user_posts', username=post.user.username) }}" class="text-medium-gray">
+                                    {{post.user.username}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    {{ post.timestamp.strftime('%d.%m.%Y') }}
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+            {% endfor %}
             </div>
         </div>
     </section>

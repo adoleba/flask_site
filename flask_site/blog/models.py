@@ -9,7 +9,9 @@ class Post(db.Model):
     intro = db.Column(db.String(200))
     body = db.Column(db.Text(), nullable=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    username = db.Column(db.String, db.ForeignKey('user.username'), nullable=False)
+
+    user_name = db.Column(db.Integer, db.ForeignKey('user.username'))
+    user = db.relationship("User", back_populates="posts")
 
     def __repr__(self):
         return 'Post {}'.format(self.title)

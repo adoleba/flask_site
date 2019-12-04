@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 
 from flask_site.users.models import User
 from . import users
+from ..blog.models import Post
 
 
 @users.route('/profile')
@@ -14,4 +15,5 @@ def user_profile():
 @users.route('/<username>')
 def user_posts(username):
     user = User.query.filter_by(username=username).first_or_404()
-    return render_template('users/user_posts.html', user=user)
+    user_posts = Post.query.filter_by(user_name=username)
+    return render_template('users/user_posts.html', user=user, user_posts=user_posts)

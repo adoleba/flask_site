@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
     created = db.Column(db.DateTime, default=datetime.utcnow())
     firstname = db.Column(db.String(50))
     lastname = db.Column(db.String(50))
-    posts = db.relationship('Post', backref='user', lazy='dynamic')
+    posts = db.relationship("Post", back_populates="user")
 
     def __repr__(self):
         return '{}'.format(self.username)

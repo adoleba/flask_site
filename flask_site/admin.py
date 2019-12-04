@@ -35,17 +35,17 @@ class AdminPostView(ModelView):
         'body': CKTextAreaField
     }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.static_folder = 'static'
+        self.endpoint = 'admin'
+
     def on_model_change(self, form, model, is_created):
         if is_created:
             model.user_name = current_user.username
 
     def get_query(self):
         return super().get_query().filter(Post.user_name == current_user.username)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.static_folder = 'static'
-        self.endpoint = 'admin'
 
     def is_accessible(self):
         return login.current_user.is_authenticated

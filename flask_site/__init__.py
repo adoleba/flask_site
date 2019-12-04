@@ -38,6 +38,9 @@ def create_app():
     from flask_site.blog import blog as blog_blueprint
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
 
+    from flask_site.about import about as about_blueprint
+    app.register_blueprint(about_blueprint, url_prefix='/about')
+
     from flask_site.users.models import User
 
     @login_manager.user_loader

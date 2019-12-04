@@ -47,6 +47,7 @@ class AdminPostView(ModelView):
     def get_query(self):
         return super().get_query().filter(Post.user_name == current_user.username)
 
+
     def is_accessible(self):
         return login.current_user.is_authenticated
 

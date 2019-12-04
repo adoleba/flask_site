@@ -31,3 +31,12 @@ class AdminPostView(ModelView):
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('auth.login', next=request.args.get))
+
+
+class AdminUserView(ModelView):
+
+    column_searchable_list = ('username',)
+    column_default_sort = ('username', True)
+    page_size = 20
+    column_exclude_list = ['password', ]
+    form_excluded_columns = ('posts',)

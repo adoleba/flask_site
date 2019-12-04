@@ -2,8 +2,23 @@ from flask import url_for, redirect, request
 from flask_admin.contrib.sqla import ModelView
 import flask_login as login
 from flask_login import current_user
+from wtforms import TextAreaField
+from wtforms.widgets import TextArea
 
 from flask_site.blog.models import Post
+
+
+class CKTextAreaWidget(TextArea):
+    def __call__(self, field, **kwargs):
+        if kwargs.get('class'):
+            kwargs['class'] += ' ckeditor'
+        else:
+            kwargs.setdefault('class', 'ckeditor')
+        return super(CKTextAreaWidget, self).__call__(field, **kwargs)
+
+
+class CKTextAreaField(TextAreaField):
+    widget = CKTextAreaWidget()
 
 
 class AdminPostView(ModelView):
@@ -13,6 +28,12 @@ class AdminPostView(ModelView):
     column_searchable_list = ('title',)
     column_default_sort = ('timestamp', True)
     page_size = 20
+
+    extra_js = ['//cdn.ckeditor.com/4.6.0/standard/ckeditor.js']
+
+    form_overrides = {
+        'body': CKTextAreaField
+    }
 
     def on_model_change(self, form, model, is_created):
         if is_created:

@@ -44,7 +44,9 @@ My blog
                         <h5 class="alt-font font-weight-600 text-extra-dark-gray">
                             {{ post.intro }}
                         </h5>
-                        <p class="text-large line-height-30 text-medium-gray text-justify xs-text-center xs-line-height-26">{{ post.body }}</p>
+                        <p class="text-large line-height-30 text-medium-gray text-justify xs-text-center xs-line-height-26">
+                            {{ post.body | safe }}
+                        </p>
                     </div>
                 </div>
             </div>

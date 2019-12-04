@@ -29,7 +29,13 @@ My blog
                             <a href="{{ url_for('blog.post', id=post.id) }}" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
                                 {{post.title}}
                             </a>
-                            <p>{{ post.body | safe | truncate(50) }}</p>
+                            <p>
+                                {% if post.intro %}
+                                    {{ post.intro  | truncate(100) }}
+                                {% else %}
+                                    {{ post.body | striptags | truncate(100) }}
+                                {% endif %}
+                            </p>
                             <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                             <div class="author">
                                 <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">

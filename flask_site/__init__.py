@@ -1,8 +1,10 @@
+from flask_script import Manager
+
 import flask_site.config
 
 from flask import Flask
 from flask_login import LoginManager
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -23,7 +25,6 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-    migrate = Migrate(app, db)
 
     from flask_site.main import main as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/')

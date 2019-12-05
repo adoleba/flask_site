@@ -67,3 +67,7 @@ class AdminAboutView(ModelView):
     can_delete = False
     column_list = ('title', 'edited')
 
+
+class HomePageView(ModelView):
+    can_delete = False
+    column_list = ('title', 'edited')

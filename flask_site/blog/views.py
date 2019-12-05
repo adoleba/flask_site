@@ -1,7 +1,7 @@
 from flask import render_template
 
 from flask_site.blog.models import Post
-from flask_site.main.views import PageView
+from flask_site.common.views import PageView
 
 
 class BlogPage(PageView):

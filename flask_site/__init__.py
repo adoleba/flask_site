@@ -49,6 +49,7 @@ def create_app():
     from flask_site.users.models import User
     from flask_site.blog.models import Post
     from flask_site.about import views, models
+    from flask_site.main import views
 
     @login_manager.user_loader
     def load_user(user_id):

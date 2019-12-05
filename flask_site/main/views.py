@@ -2,6 +2,7 @@ from flask import render_template
 from flask.views import MethodView
 
 from . import main
+from .models import Home
 
 
 class ContextMixin:
@@ -20,6 +21,10 @@ class PageView(ContextMixin, MethodView):
         return ctx
 
 
-@main.route('/')
-def main():
-    return render_template('index.html')
+class HomePage(PageView):
+    def get(self, **kwargs):
+        ctx = self.get_context_data(**kwargs)
+        ctx.update({
+            'home': Home.query.filter_by(id=1).first(),
+        })
+        return render_template('index.html', **ctx)

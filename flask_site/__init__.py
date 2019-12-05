@@ -46,6 +46,9 @@ def create_app():
     from flask_site.about import about_us as about_blueprint
     app.register_blueprint(about_blueprint, url_prefix='/about')
 
+    from flask_site.contact import contact as contact_blueprint
+    app.register_blueprint(contact_blueprint, url_prefix='/contact')
+
     from flask_site.users.models import User
     from flask_site.blog.models import Post
     from flask_site.about import views, models

@@ -1,14 +1,16 @@
+import os
+
 from flask_script import Manager
 
-import flask_site.config
+from flask_site import config
 
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate, MigrateCommand
 from flask_sqlalchemy import SQLAlchemy
 
-
 db = SQLAlchemy()
+manager = Manager()
 
 
 def create_app():
@@ -25,6 +27,9 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
+    migrate = Migrate(app, db)
+
+    manager.add_command('db', MigrateCommand)
 
     from flask_site.main import main as main_blueprint
     app.register_blueprint(main_blueprint, url_prefix='/')
@@ -38,7 +43,12 @@ def create_app():
     from flask_site.blog import blog as blog_blueprint
     app.register_blueprint(blog_blueprint, url_prefix='/blog')
 
+    from flask_site.about import about_us as about_blueprint
+    app.register_blueprint(about_blueprint, url_prefix='/about')
+
     from flask_site.users.models import User
+    from flask_site.blog.models import Post
+    from flask_site.about import views, models
 
     @login_manager.user_loader
     def load_user(user_id):

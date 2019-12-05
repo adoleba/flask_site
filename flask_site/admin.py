@@ -47,7 +47,6 @@ class AdminPostView(ModelView):
     def get_query(self):
         return super().get_query().filter(Post.user_name == current_user.username)
 
-
     def is_accessible(self):
         return login.current_user.is_authenticated
 
@@ -62,3 +61,9 @@ class AdminUserView(ModelView):
     page_size = 20
     column_exclude_list = ['password', ]
     form_excluded_columns = ('posts',)
+
+
+class AdminAboutView(ModelView):
+    can_delete = False
+    column_list = ('title', 'edited')
+

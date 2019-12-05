@@ -1,8 +1,13 @@
 from flask import render_template
 
-from . import about
+from flask_site.about.models import About
+from flask_site.main.views import PageView
 
 
-@about.route('')
-def about():
-    return render_template("about/about.html")
+class AboutPage(PageView):
+    def get(self, **kwargs):
+        ctx = self.get_context_data(**kwargs)
+        ctx.update({
+            'about': About.query.filter_by(id=1).first(),
+        })
+        return render_template('about/about.html', **ctx)

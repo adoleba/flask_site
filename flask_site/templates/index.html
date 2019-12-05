@@ -12,9 +12,9 @@ My blog - welcome
                 <div class="col-md-12 col-sm-12 col-xs-12 extra-small-screen display-table page-title-large">
                     <div class="display-table-cell vertical-align-middle text-center">
                         <h1 class="text-extra-dark-gray alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">
-                            Portfolio image gallery
+                            {{ home.title }}
                         </h1>
-                        <span class="opacity6 alt-font">Choose from our wide range of portfolio layouts</span>
+                        <span class="opacity6 alt-font">{{ home.title_description }}</span>
                     </div>
                 </div>
             </div>
@@ -25,17 +25,17 @@ My blog - welcome
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-sm-11 col-xs-12 center-col text-center wow fadeInUp margin-eight-bottom">
-                    <div class="alt-font text-medium-gray margin-5px-bottom text-uppercase text-small">About Digital Agency</div>
-                    <h6 class="font-weight-300 text-extra-dark-gray no-margin-bottom">We always stay with our <strong class="font-weight-400">clients and respect</strong> their business. We deliver 100% and provide instant response to help them succeed in constantly changing and <strong class="font-weight-400">challenging business</strong> world.</h6>
+                    <div class="alt-font text-medium-gray margin-5px-bottom text-uppercase text-small">{{ home.about_intro }}</div>
+                    <h6 class="font-weight-300 text-extra-dark-gray no-margin-bottom">{{ home.about_description }}</h6>
                 </div>
             </div>
             <div class="row equalize xs-equalize-auto">
                 <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom xs-margin-30px-bottom wow fadeInUp">
                     <div class="bg-white text-center">
                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
-                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">Understand the situation</span>
-                            <p>Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been standard dummy.</p>
-                            <a href="#" class="btn btn-small btn-rounded btn-transparent-dark-gray">Explore services <i class="ti-arrow-right"></i></a>
+                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ home.first_card_title }}</span>
+                            <p>{{ home.first_card_description }}</p>
+                            <a href="{{ url_for('about_us.about_us') }}" class="btn btn-small btn-rounded btn-transparent-dark-gray">About Us <i class="ti-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -43,9 +43,9 @@ My blog - welcome
                 <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom xs-margin-30px-bottom wow fadeInUp" data-wow-delay="0.2s">
                     <div class="bg-white text-center">
                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
-                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">Bring the experience to life</span>
-                            <p>Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been standard dummy.</p>
-                            <a href="#" class="btn btn-small btn-rounded btn-transparent-dark-gray">Explore services <i class="ti-arrow-right"></i></a>
+                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ home.second_card_title }}</span>
+                            <p>{{ home.second_card_description }}</p>
+                            <a href="#" class="btn btn-small btn-rounded btn-transparent-dark-gray">Contact Us <i class="ti-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -53,9 +53,9 @@ My blog - welcome
                 <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom xs-no-margin-bottom wow fadeInUp" data-wow-delay="0.4s">
                     <div class="bg-white text-center">
                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
-                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">Strategise chart the course</span>
-                            <p>Lorem Ipsum is simply text of the printing and typesetting industry. Lorem Ipsum has been standard dummy.</p>
-                            <a href="#" class="btn btn-small btn-rounded btn-transparent-dark-gray">Explore services <i class="ti-arrow-right"></i></a>
+                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ home.third_card_title }}</span>
+                            <p>{{ home.third_card_description }}</p>
+                            <a href="{{ url_for('blog.blog_page') }}" class="btn btn-small btn-rounded btn-transparent-dark-gray">Blog <i class="ti-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -67,8 +67,8 @@ My blog - welcome
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 center-col margin-eight-bottom sm-margin-40px-bottom xs-margin-30px-bottom text-center">
-                    <div class="alt-font text-medium-gray margin-5px-bottom text-uppercase text-small">Latest Blogs</div>
-                    <h5 class="alt-font text-extra-dark-gray font-weight-600">Publish what you think, don't put it on social media</h5>
+                    <div class="alt-font text-medium-gray margin-5px-bottom text-uppercase text-small">{{ home.blog_intro }}</div>
+                    <h5 class="alt-font text-extra-dark-gray font-weight-600">{{ home.blog_title }}</h5>
                 </div>
             </div>
             <div class="row equalize xs-equalize-auto">

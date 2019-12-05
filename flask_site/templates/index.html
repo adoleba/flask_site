@@ -71,46 +71,33 @@ My blog - welcome
                     <h5 class="alt-font text-extra-dark-gray font-weight-600">{{ home.blog_title }}</h5>
                 </div>
             </div>
+
+
             <div class="row equalize xs-equalize-auto">
-                <div class="grid-item col-md-4 col-sm-6 col-xs-12 wow fadeInUp sm-padding-30px-bottom xs-text-center">
-                    <div class="blog-post bg-light-gray inner-match-height">
-                        <div class="post-details padding-40px-all sm-padding-20px-all">
-                            <a href="#" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">I like the body. I like to design everything to do with the body.</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum standard dummy...</p>
-                            <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb sm-margin-15px-tb"></div>
-                            <div class="author">
-                                <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">by <a href="#" class="text-medium-gray">Jay Benjamin</a>&nbsp;&nbsp;|&nbsp;&nbsp;20 April 2017</span>
+                {% for post in posts %}
+                    <div class="grid-item col-md-4 col-sm-6 col-xs-12 wow fadeInUp sm-padding-30px-bottom xs-text-center">
+                        <div class="blog-post bg-light-gray inner-match-height">
+                            <div class="post-details padding-40px-all sm-padding-20px-all">
+                                <a href="{{ url_for('blog.post', id=post.id) }}" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
+                                    {{post.title}}
+                                </a>
+                                <p>
+                                    {% if post.intro %}
+                                        {{ post.intro  | truncate(100) }}
+                                    {% else %}
+                                        {{ post.body | striptags | truncate(100) }}
+                                    {% endif %}
+                                </p>
+                                <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
+                                <div class="author">
+                                    <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">
+                                        by <a href="{{ url_for('users.user_posts', username=post.user.username) }}" class="text-medium-gray">{{post.user.username}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                        {{ post.timestamp.strftime('%d.%m.%Y') }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="grid-item col-md-4 col-sm-6 col-xs-12 wow fadeInUp sm-padding-30px-bottom xs-text-center" data-wow-delay="0.2s">
-                    <div class="blog-post bg-light-gray inner-match-height">
-                        <div class="post-details padding-40px-all sm-padding-20px-all">
-                            <a href="#" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">Styles come and go. Design is a language, not a style.</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum standard dummy...</p>
-                            <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb sm-margin-15px-tb"></div>
-                            <div class="author">
-                                <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">by <a href="#" class="text-medium-gray">Herman Miller</a>&nbsp;&nbsp;|&nbsp;&nbsp;20 April 2017</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="grid-item col-md-4 col-sm-6 col-xs-12 wow fadeInUp xs-text-center" data-wow-delay="0.4s">
-                    <div class="blog-post bg-light-gray inner-match-height">
-                        <div class="post-details padding-40px-all sm-padding-20px-all">
-                            <a href="#" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">Recognizing the need is the primary condition for design.</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum standard dummy....</p>
-                            <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb sm-margin-15px-tb"></div>
-                            <div class="author">
-                                <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">by <a href="#" class="text-medium-gray">Hugh Macleod</a>&nbsp;&nbsp;|&nbsp;&nbsp;15 March 2017</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                {% endfor %}
             </div>
         </div>
     </section>

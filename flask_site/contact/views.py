@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request, redirect
 
 from flask_site.common.views import PageView
 from flask_site.contact.forms import ContactForm
@@ -15,3 +15,13 @@ class ContactPage(PageView):
             'form': form
         })
         return render_template('contact/contact.html', **ctx)
+
+    def post(self, **kwargs):
+        ctx = self.get_context_data(**kwargs)
+        ctx.update({
+            'contact': Contact.query.filter_by(id=1).first(),
+            'name': request.form['name'],
+            'email': request.form['email'],
+            'subject': request.form['subject'],
+            'body': request.form['body']
+        })

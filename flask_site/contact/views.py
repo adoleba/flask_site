@@ -1,5 +1,7 @@
 from flask import render_template, request, redirect
+from flask_mail import Message
 
+from flask_site import mail
 from flask_site.common.views import PageView
 from flask_site.contact.forms import ContactForm
 from flask_site.contact.models import Contact, ContactThankYou
@@ -28,11 +30,24 @@ class ContactPage(PageView):
 
     def post(self, **kwargs):
         ctx = self.get_context_data(**kwargs)
+        name = request.form['name'],
+        email = request.form['email'],
+        subject = request.form['subject'],
+        body = request.form['body']
+
         ctx.update({
             'contact': Contact.query.filter_by(id=1).first(),
-            'name': request.form['name'],
-            'email': request.form['email'],
-            'subject': request.form['subject'],
-            'body': request.form['body']
+            'name': name,
+            'email': email,
+            'subject': subject,
+            'body': body
         })
+        send_email(subject, 'ania.doleba@wp.pl', ['django.ania@gmail.com'], body)
+
         return redirect('thank-you')
+
+
+def send_email(subject, sender, recipients, text_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    mail.send(msg)

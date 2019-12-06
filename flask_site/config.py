@@ -3,6 +3,11 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = False
     DEBUG = False
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = 1
+    MAIL_USERNAME = 'django.ania@gmail.com'
+    MAIL_PASSWORD = '0987poiu'
 
 
 class DevelopmentConfig(Config):

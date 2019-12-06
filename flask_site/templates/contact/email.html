@@ -1,0 +1,27 @@
+{% autoescape off %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ email }}</title>
+    </head>
+
+    <body>
+
+        <p>Dane nadawcy:</p>
+        <h3>{{ name }}</h3>
+
+        <p>Adres e-mail nadawcy:</p>
+        <h3>{{ email }}</h3>
+
+        <p>Temat wiadomości:</p>
+        <h3>{{ subject }}</h3>
+
+        <p>Treść wiadomości:</p>
+        <h3>{{ body }}</h3>
+
+    </body>
+</html>
+
+{% endautoescape %}

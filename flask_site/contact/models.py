@@ -12,3 +12,13 @@ class Contact(db.Model):
 
     def __repr__(self):
         return self.title
+
+
+class ContactThankYou(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    intro = db.Column(db.String())
+    body = db.Column(db.Text())
+    edited = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return self.intro

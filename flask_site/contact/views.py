@@ -30,24 +30,20 @@ class ContactPage(PageView):
 
     def post(self, **kwargs):
         ctx = self.get_context_data(**kwargs)
-        name = request.form['name']
-        email = request.form['email']
-        subject = request.form['subject']
-        body = request.form['body']
 
         ctx.update({
             'contact': Contact.query.filter_by(id=1).first(),
-            'name': name,
-            'email': email,
-            'subject': subject,
-            'body': body
+            'name': request.form['name'],
+            'email': request.form['email'],
+            'subject': request.form['subject'],
+            'body': request.form['body']
         })
-        send_email(subject, str(name), [current_app.config['MAIL_USERNAME']], body, email, name)
+        send_email(current_app.config['MAIL_USERNAME'], **ctx)
 
         return redirect('thank-you')
 
 
-def send_email(subject, sender, recipients, body, email, name):
-    page = render_template('contact/email.html', body=body, email=email, name=name, subject=subject)
-    msg = Message(subject, sender=name, recipients=recipients, html=page, reply_to=email)
+def send_email(recipients, **ctx):
+    page = render_template('contact/email.html', **ctx)
+    msg = Message(ctx['subject'], sender=ctx['name'], recipients=[recipients], html=page, reply_to=ctx['email'])
     mail.send(msg)

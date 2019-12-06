@@ -65,14 +65,17 @@ class AdminUserView(ModelView):
 
 class AdminAboutView(ModelView):
     can_delete = False
+    can_create = False
     column_list = ('title', 'edited')
 
 
 class AdminPageView(ModelView):
     can_delete = False
+    can_create = False
     column_list = ('title', 'edited')
 
 
 class ContactThankYouAdminPageView(ModelView):
     can_delete = False
+    can_create = False
     column_list = ('intro', 'edited')

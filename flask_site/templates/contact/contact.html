@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+My blog - welcome
+{% endblock %}
+
+{% block content %}
+
+    <section class="wow fadeIn cover-background background-position-top top-space">
+        <div class="opacity-medium bg-extra-dark-gray"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 display-table page-title-large">
+                    <div class="display-table-cell vertical-align-middle text-center padding-30px-tb">
+                        <span class="display-block text-white opacity6 width-45 sm-width-100 center-col alt-font margin-5px-bottom">{{ contact.sub_title }}</span>
+                        <h1 class="alt-font text-white font-weight-600 no-margin-bottom">{{ contact.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="no-padding-bottom wow fadeIn" id="section-down">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 text-center center-col margin-eight-bottom xs-margin-30px-bottom last-paragraph-no-margin">
+                    {{ contact.body }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wow fadeIn bg-light-gray">
+        <div class="container">
+            <form action="." method="post">
+                {{ form.hidden_tag()}}
+                <div class="row">
+                    <div class="col-md-6 wow fadeIn center-col">
+                        <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
+                            <div class="input-bg">
+                                Name:<br />
+                                {{ form.name }}
+                                E-mail:<br />
+                                {{ form.email}}
+                                Subject:<br />
+                                {{ form.subject }}
+                                Message<br />
+                                {{ form.body(rows="10") }}<br />
+                                <button type="submit" class="btn btn-small border-radius-4 btn-black">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}

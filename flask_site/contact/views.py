@@ -12,5 +12,6 @@ class ContactPage(PageView):
         ctx = self.get_context_data(**kwargs)
         ctx.update({
             'contact': Contact.query.filter_by(id=1).first(),
+            'form': form
         })
         return render_template('contact/contact.html', **ctx)

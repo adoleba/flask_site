@@ -68,11 +68,11 @@ class AdminAboutView(ModelView):
     column_list = ('title', 'edited')
 
 
-class HomePageView(ModelView):
+class AdminPageView(ModelView):
     can_delete = False
     column_list = ('title', 'edited')
 
 
-class ContactPageView(ModelView):
+class ContactThankYouAdminPageView(ModelView):
     can_delete = False
-    column_list = ('title', 'edited')
+    column_list = ('intro', 'edited')

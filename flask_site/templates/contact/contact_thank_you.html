@@ -6,27 +6,19 @@ My blog
 
 {% block content %}
 
-        <section class="wow fadeIn bg-light-gray padding-35px-tb page-title-small top-space">
-            <div class="container">
-                <div class="row equalize xs-equalize-auto text-center">
-                    <h1 class="alt-font text-extra-dark-gray font-weight-600 no-margin-bottom text-uppercase">
-                        post.title</h1>
-                </div>
-            </div>
-        </section>
-
-        <section class="wow fadeIn no-padding-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-sm-12 col-xs-12 center-col margin-50px-top sm-margin-30px-top wow fadeInUp">
-                        <div class="display-table width-100 border-all border-color-extra-light-gray padding-50px-all sm-padding-30px-all xs-padding-20px-all">
-                            <div class="padding-40px-left display-table-cell vertical-align-top last-paragraph-no-margin xs-no-padding-left xs-display-block xs-text-center">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
-                            </div>
-                        </div>
+    <section class="wow fadeIn parallax" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 extra-small-screen display-table page-title-large">
+                    <div class="display-table-cell vertical-align-middle text-center">
+                        <h1 class="text-extra-dark-gray alt-font font-weight-600 letter-spacing-minus-1 margin-10px-bottom">
+                            {{ contact.intro }}
+                        </h1>
+                        <span class="opacity6 alt-font">{{ contact.body }}</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
 {% endblock %}

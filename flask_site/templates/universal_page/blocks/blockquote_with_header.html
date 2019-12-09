@@ -1,0 +1,17 @@
+<section class="wow fadeIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 center-col last-paragraph-no-margin xs-text-center">
+                {% for value in page.blockquotewithheader %}
+                    <h5 class="alt-font font-weight-600 text-extra-dark-gray">
+                        {{ value.header_text }}</h5>
+
+                    <p class="text-large line-height-30 text-medium-gray text-justify xs-text-center xs-line-height-26">
+                        {{ value.paragraph_text }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+

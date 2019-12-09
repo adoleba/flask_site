@@ -27,7 +27,7 @@
 
                         {% for page in pages %}
                             <li class="dropdown megamenu-fw">
-                                <a href="{{ url_for('universal_page.render_page', url=page.url) }}">{{ page.name }}</a>
+                                <a href="{{ url_for('universal_page.render_page', id=page.id) }}">{{ page.name }}</a>
                             </li>
                         {% endfor %}
 

@@ -1,0 +1,45 @@
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function( ) {
+    $('.panel-body').hide();
+    $(".panel-heading").click(function () {
+        $(this).next().toggle(
+
+        );
+        if ($('.panel-body').is(':visible')) {
+            $('.panel-title > span > i', this).switchClass('ti-plus', 'ti-minus');
+        } else {
+            $('.panel-title > span > i', this).switchClass('ti-minus', 'ti-plus');
+        }
+
+    });
+
+})
+</script>
+
+
+<section class="wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 center-col">
+                        <div class="panel-group accordion-style1" id="accordion-design">
+                            <div class="panel">
+                                {% for value in page.faq %}
+                                    <div class="panel-heading">
+                                        <p class="panel-title font-weight-500 text-extra-dark-gray text-uppercase">
+                                            {{ value.question }}
+                                            <span class="pull-right"><i class="ti-plus"></i></span>
+                                        </p>
+                                    </div>
+                                <div class="panel-body">
+                                    {{ value.answer }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+

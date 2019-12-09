@@ -77,5 +77,5 @@ class AdminPageView(ModelView):
 
 class ContactThankYouAdminPageView(ModelView):
     can_delete = False
-    can_create = False
+    can_create = True
     column_list = ('intro', 'edited')

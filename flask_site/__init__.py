@@ -36,6 +36,9 @@ def create_app():
     from flask_site.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/')
 
+    from flask_site.universal_page import universal_page as universal_page_blueprint
+    app.register_blueprint(universal_page_blueprint, url_prefix='/')
+
     from flask_site.users import users as users_blueprint
     app.register_blueprint(users_blueprint, url_prefix='/users')
 
@@ -47,9 +50,6 @@ def create_app():
 
     from flask_site.contact import contact_us as contact_blueprint
     app.register_blueprint(contact_blueprint, url_prefix='/contact')
-
-    from flask_site.universal_page import universal_page as universal_page_blueprint
-    app.register_blueprint(universal_page_blueprint, url_prefix='/page')
 
     from flask_site.users.models import User
     from flask_site.blog.models import Post

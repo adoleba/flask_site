@@ -6,11 +6,13 @@ from flask_site.auth.forms import SignupForm, LoginForm
 from flask_site.users.models import User
 from . import auth
 from .. import db
+from ..universal_page.models import UniversalPage
 
 
 @auth.route('/login', methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    pages = UniversalPage.query.all()
 
     if request.method == 'POST':
         username = request.form['username']
@@ -25,19 +27,22 @@ def login():
         login_user(user)
         return redirect(url_for('users.user_profile'))
 
-    return render_template("auth/login.html", form=form)
+    return render_template("auth/login.html", form=form, pages=pages)
 
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return render_template("auth/logout.html")
+    pages = UniversalPage.query.all()
+    return render_template("auth/logout.html", pages=pages)
 
 
 @auth.route('/signup', methods=["GET", "POST"])
 def signup():
     form = SignupForm()
+    pages = UniversalPage.query.all()
+
     if request.method == 'POST':
         email = request.form['email']
         username = request.form['username']
@@ -59,11 +64,12 @@ def signup():
             db.session.commit()
             return redirect(url_for('auth.registered'))
 
-    return render_template('auth/signup.html', form=form)
+    return render_template('auth/signup.html', form=form, pages=pages)
 
 
 @auth.route('/registered')
 def registered():
-    return render_template('auth/registered.html')
+    pages = UniversalPage.query.all()
+    return render_template('auth/registered.html', pages=pages)
 
 

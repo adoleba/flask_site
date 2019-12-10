@@ -1,5 +1,4 @@
-from flask import render_template, request
-from flask.views import MethodView, View
+from flask import render_template
 
 from flask_site.common.views import PageView
 from flask_site.universal_page.models import UniversalPage

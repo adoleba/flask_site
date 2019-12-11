@@ -6,33 +6,35 @@ My blog - welcome
 
 {% block content %}
 
-    {% if page.blockquote %}
-        {% include 'universal_page/blocks/blockquote.html' %}
+{% for block in sorted_dict.keys() %}
+    {% if block == 'blockquote' %}
+            {% include 'universal_page/blocks/blockquote.html' %}
     {% endif %}
 
-    {% if page.blockquotewithheader %}
-        {% include 'universal_page/blocks/blockquote_with_header.html' %}
-    {% endif %}
-
-    {% if page.faq %}
-        {% include 'universal_page/blocks/faq.html' %}
-    {% endif %}
-
-    {% if page.greyheader %}
-        {% include 'universal_page/blocks/grey_header.html' %}
-    {% endif %}
-
-    {% if page.smallgreyheader %}
+    {% if block == 'smallgreyheader' %}
         {% include 'universal_page/blocks/small_grey_header.html' %}
     {% endif %}
 
-    {% if page.threecolumnswithheaders %}
+    {% if block == 'blockquotewithheader' %}
+        {% include 'universal_page/blocks/blockquote_with_header.html' %}
+    {% endif %}
+
+    {% if block == 'faq' %}
+        {% include 'universal_page/blocks/faq.html' %}
+    {% endif %}
+
+    {% if block == 'greyheader' %}
+        {% include 'universal_page/blocks/grey_header.html' %}
+    {% endif %}
+
+    {% if block == 'threecolumnswithheaders' %}
         {% include 'universal_page/blocks/three_columns_with_headers.html' %}
     {% endif %}
 
-    {% if page.white_headerwithbutton %}
+    {% if block == 'whiteheaderwithbutton' %}
         {% include 'universal_page/blocks/white_header_with_button.html' %}
     {% endif %}
 
+{% endfor %}
 
 {% endblock %}

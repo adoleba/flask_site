@@ -6,7 +6,7 @@ My blog - welcome
 
 {% block content %}
 
-{% for block in sorted_dict.keys() %}
+{% for block in blocks_sorted_dict.keys() %}
     {% if block == 'blockquote' %}
             {% include 'universal_page/blocks/blockquote.html' %}
     {% endif %}

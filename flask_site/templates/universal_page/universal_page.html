@@ -8,15 +8,15 @@ My blog - welcome
 
 {% for block in blocks_sorted_dict.keys() %}
     {% if block == 'blockquote' %}
-            {% include 'universal_page/blocks/blockquote.html' %}
+        {% include 'universal_page/blocks/blockquote.html' %}
     {% endif %}
 
     {% if block == 'smallgreyheader' %}
-        {% include 'universal_page/blocks/small_grey_header.html' %}
+        {% include 'universal_page/blocks/smallgreyheader.html' %}
     {% endif %}
 
     {% if block == 'blockquotewithheader' %}
-        {% include 'universal_page/blocks/blockquote_with_header.html' %}
+        {% include 'universal_page/blocks/blockquotewithheader.html' %}
     {% endif %}
 
     {% if block == 'faq' %}
@@ -24,16 +24,17 @@ My blog - welcome
     {% endif %}
 
     {% if block == 'greyheader' %}
-        {% include 'universal_page/blocks/grey_header.html' %}
+        {% include 'universal_page/blocks/greyheader.html' %}
     {% endif %}
 
     {% if block == 'threecolumnswithheaders' %}
-        {% include 'universal_page/blocks/three_columns_with_headers.html' %}
+        {% include 'universal_page/blocks/threecolumnswithheaders.html' %}
     {% endif %}
 
     {% if block == 'whiteheaderwithbutton' %}
-        {% include 'universal_page/blocks/white_header_with_button.html' %}
+        {% include 'universal_page/blocks/whiteheaderwithbutton.html' %}
     {% endif %}
+
 
 {% endfor %}
 

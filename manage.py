@@ -1,7 +1,7 @@
 from flask_admin import Admin
 
 from flask_site.about.models import About
-from flask_site.admin import AdminPostView, AdminUserView, AdminAboutView, AdminPageView, ContactThankYouAdminPageView, \
+from flask_site.admin import AdminPostView, AdminUserView, AdminAboutView, AdminPageView, ContactThankYouAdminPageView,\
     UniversalPageAdmin
 from flask_site.contact.models import Contact, ContactThankYou
 from flask_site.main.models import Home

@@ -7,35 +7,7 @@ My blog - welcome
 {% block content %}
 
 {% for block in blocks_sorted_dict.keys() %}
-    {% if block == 'blockquote' %}
-        {% include 'universal_page/blocks/blockquote.html' %}
-    {% endif %}
-
-    {% if block == 'smallgreyheader' %}
-        {% include 'universal_page/blocks/smallgreyheader.html' %}
-    {% endif %}
-
-    {% if block == 'blockquotewithheader' %}
-        {% include 'universal_page/blocks/blockquotewithheader.html' %}
-    {% endif %}
-
-    {% if block == 'faq' %}
-        {% include 'universal_page/blocks/faq.html' %}
-    {% endif %}
-
-    {% if block == 'greyheader' %}
-        {% include 'universal_page/blocks/greyheader.html' %}
-    {% endif %}
-
-    {% if block == 'threecolumnswithheaders' %}
-        {% include 'universal_page/blocks/threecolumnswithheaders.html' %}
-    {% endif %}
-
-    {% if block == 'whiteheaderwithbutton' %}
-        {% include 'universal_page/blocks/whiteheaderwithbutton.html' %}
-    {% endif %}
-
-
+    {% include 'universal_page/blocks/'+block+'.html' %}
 {% endfor %}
 
 {% endblock %}

@@ -12,19 +12,30 @@ class SamplePage(PageView):
         url = ctx['url']
         page = UniversalPage.query.filter_by(url=url).first()
 
-        blocks_order_dict = {}
-        block_models = ['blockquote', 'smallgreyheader', 'blockquotewithheader', 'faq', 'greyheader',
-                        'threecolumnswithheaders', 'whiteheaderwithbutton']
+        block_order_list = []
+        block_models = ['whiteheaderwithbutton', 'smallgreyheader', 'blockquotewithheader', 'faq', 'greyheader',
+                        'threecolumnswithheaders', 'blockquote']
 
         if page:
             for model in block_models:
                 if getattr(page, model):
-                    block_order_name = 'order_' + model
-                    order = getattr(getattr(page, model)[0], block_order_name)
-                    blocks_order_dict[model] = order
 
-        blocks_sorted_dict = {block_name: block_order for block_name, block_order in sorted(blocks_order_dict.items(),
-                                                                                            key=lambda item: item[1])}
+                    blocks_quantity = len(getattr(page, model))
+                    for number in range(blocks_quantity):
 
-        return render_template('universal_page/universal_page.html', page=page,
-                               blocks_sorted_dict=blocks_sorted_dict, **ctx)
+                        block_order_name = 'order_' + model
+                        order = getattr(getattr(page, model)[number], block_order_name)
+                        current_block = getattr(page, model)[number]
+                        attributes_list = []
+                        model_columns = current_block.__table__.columns._data.keys()
+                        for value in model_columns:
+                            attributes_list.append(value)
+
+                        attribute_values = []
+                        for element in attributes_list:
+                            attribute_values.append(getattr(current_block, element))
+
+                        block_order_list.append((str(order), model, attribute_values))
+        sorted_list = sorted(block_order_list)
+
+        return render_template('universal_page/universal_page.html', page=page, sorted_list=sorted_list, **ctx)

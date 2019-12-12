@@ -6,8 +6,8 @@ My blog - welcome
 
 {% block content %}
 
-{% for block in blocks_sorted_dict.keys() %}
-    {% include 'universal_page/blocks/'+block+'.html' %}
-{% endfor %}
+    {% for blocks in sorted_list %}
+        {% include 'universal_page/blocks/'+blocks[1]+'.html' %}
+    {% endfor %}
 
 {% endblock %}

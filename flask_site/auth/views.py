@@ -1,12 +1,13 @@
+from flask_site.auth import auth
+
 from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flask_site.auth.forms import SignupForm, LoginForm
 from flask_site.users.models import User
-from . import auth
-from .. import db
-from ..universal_page.models import UniversalPage
+from flask_site import db
+from flask_site.universal_page.models import UniversalPage
 
 
 @auth.route('/login', methods=["GET", "POST"])
@@ -71,5 +72,3 @@ def signup():
 def registered():
     pages = UniversalPage.query.all()
     return render_template('auth/registered.html', pages=pages)
-
-

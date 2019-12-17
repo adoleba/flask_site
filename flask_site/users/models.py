@@ -33,5 +33,5 @@ class User(db.Model, UserMixin):
     posts = db.relationship("Post", back_populates="user")
     role = db.relationship('Role', secondary=users_roles, backref=db.backref('users', lazy='dynamic'))
 
-    def __repr__(self):
-        return '{}'.format(self.username)
+    def __str__(self):
+        return self.username

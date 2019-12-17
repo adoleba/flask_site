@@ -2,7 +2,7 @@ from flask import render_template
 
 from .models import Home
 from flask_site.common.views import PageView
-from ..blog.models import Post
+from flask_site.blog.models import Post
 
 
 class HomePage(PageView):

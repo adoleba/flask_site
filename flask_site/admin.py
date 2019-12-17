@@ -6,6 +6,8 @@ from wtforms import TextAreaField
 from wtforms.widgets import TextArea
 
 from flask_site.blog.models import Post
+from flask_site.universal_page.admin import BlockQuoteWithHeaderForm, ThreeColumnsWithHeadersForm, \
+    WhiteHeaderWithButtonForm, FaqForm, SmallGreyHeaderForm, GreyHeaderForm, BlockQuoteForm
 
 
 class CKTextAreaWidget(TextArea):
@@ -77,5 +79,11 @@ class AdminPageView(ModelView):
 
 class ContactThankYouAdminPageView(ModelView):
     can_delete = False
-    can_create = False
+    can_create = True
     column_list = ('intro', 'edited')
+
+
+class UniversalPageAdmin(ModelView):
+
+    inline_models = (BlockQuoteWithHeaderForm(), ThreeColumnsWithHeadersForm(),
+                     WhiteHeaderWithButtonForm(), FaqForm(), SmallGreyHeaderForm(), GreyHeaderForm(), BlockQuoteForm(),)

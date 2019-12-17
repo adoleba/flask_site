@@ -25,6 +25,12 @@
                             <a href="{{ url_for('contact_us.contact_us') }}">Contact</a>
                         </li>
 
+                        {% for page in pages %}
+                            <li class="dropdown megamenu-fw">
+                                <a href="{{ url_for('universal_page.render_page', url=page.url) }}">{{ page.name }}</a>
+                            </li>
+                        {% endfor %}
+
                         {% if current_user.is_authenticated %}
                             <li class="dropdown megamenu-fw">
                                 <a href="/admin">Admin</a>

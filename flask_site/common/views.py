@@ -14,4 +14,9 @@ class PageView(ContextMixin, MethodView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+
+        from flask_site.universal_page.models import UniversalPage
+        ctx.update({
+            'pages': UniversalPage.query.all(),
+        })
         return ctx

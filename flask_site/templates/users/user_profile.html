@@ -7,10 +7,23 @@ My blog - welcome
 
 {% block content %}
 
+    <section class="wow fadeIn parallax" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 extra-small-screen display-table page-title-large">
+                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 center-col margin-eight-bottom sm-margin-40px-bottom xs-margin-30px-bottom text-center last-paragraph-no-margin">
+                        <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase">Welcome {{ username }}!</h5>
+                    </div>
+                    <div class="text-extra-dark-gray text-center alt-font text-large font-weight-600 margin-30px-bottom">
+                        <p>Go to <a href="{{ url_for('main.main')}}">homepage</a></p>
+                    </div>
+                    <div class="text-extra-dark-gray text-center alt-font text-large font-weight-600 margin-30px-bottom">
+                        <p>Go to <a href="/admin">admin page</a></p>
+                    </div>
 
-    <p>test</p>
-    <p>test</p>
-    <p>test</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<h1>Welcome {{ username }}</h1>
 {% endblock %}

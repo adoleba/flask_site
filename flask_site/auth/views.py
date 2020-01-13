@@ -51,13 +51,14 @@ def signup():
 
         user_verify_email = User.query.filter_by(email=email).first()
         if user_verify_email:
-            flash('Email address already exists')
-            return redirect(url_for('auth.signup'))
+            flash('Email address already exists.')
 
         user_verify_username = User.query.filter_by(username=username).first()
         if user_verify_username:
-            flash('Username already exists')
-            return redirect(url_for('auth.signup'))
+            flash('Username already exists.')
+
+        if request.form['password'] != request.form['password2']:
+            flash('Passwords are not the same.')
 
         if form.validate_on_submit():
             new_user = User(email=email, username=username, password=generate_password_hash(password, method='sha256'))

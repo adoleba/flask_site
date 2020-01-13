@@ -95,6 +95,12 @@ def forgot_password():
     return render_template("auth/forgot_password.html", form=form)
 
 
+@auth.route('/password_reset/<username>/<code>', methods=["GET", "POST"])
+def reset_password(username, code):
+    user = User.query.filter_by(username=username).first()
+    return "La la la"
+
+
 def send_email(user):
     page = render_template('auth/reset_password.html', user=user)
     msg = Message(recipients=[user.email], html=page, sender='Flask Blog', subject='Reset Password')

@@ -1,3 +1,5 @@
+from flask_mail import Message
+
 from flask_site.auth import auth
 
 from flask import render_template, redirect, url_for, request, flash
@@ -6,8 +8,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
 from flask_site.users.models import User
-from flask_site import db
+from flask_site import db, mail
 from flask_site.universal_page.models import UniversalPage
+import uuid
 
 
 @auth.route('/login', methods=["GET", "POST"])
@@ -78,4 +81,21 @@ def registered():
 @auth.route('/forgot', methods=["GET", "POST"])
 def forgot_password():
     form = ForgotForm()
+    if form.validate_on_submit():
+        email = request.form['email']
+        user = User.query.filter_by(email=email).first()
+        if user:
+            code = str(uuid.uuid4())
+            user.change_configuration = {
+                "password_reset_code": code
+            }
+            send_email(user)
+
+        flash('You will receive a password reset email if we find email in our system')
     return render_template("auth/forgot_password.html", form=form)
+
+
+def send_email(user):
+    page = render_template('auth/reset_password.html', user=user)
+    msg = Message(recipients=[user.email], html=page, sender='Flask Blog', subject='Reset Password')
+    mail.send(msg)

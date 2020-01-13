@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flask_site.auth.forms import SignupForm, LoginForm
+from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
 from flask_site.users.models import User
 from flask_site import db
 from flask_site.universal_page.models import UniversalPage
@@ -73,3 +73,9 @@ def signup():
 def registered():
     pages = UniversalPage.query.all()
     return render_template('auth/registered.html', pages=pages)
+
+
+@auth.route('/forgot', methods=["GET", "POST"])
+def forgot_password():
+    form = ForgotForm()
+    return render_template("auth/forgot_password.html", form=form)

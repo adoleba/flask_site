@@ -89,6 +89,8 @@ def forgot_password():
             user.change_configuration = {
                 "password_reset_code": code
             }
+            user.password_code = code
+            db.session.commit()
             send_email(user)
 
         flash('You will receive a password reset email if we find email in our system')
@@ -100,18 +102,24 @@ def reset_password(username, code):
     user = User.query.filter_by(username=username).first()
     form = PasswordResetForm()
 
-    if request.method == 'POST':
-        password = request.form['password']
+    if code == user.password_code:
 
-        if request.form['password'] != request.form['password2']:
-            flash('Passwords are not the same.')
+        if request.method == 'POST':
+            password = request.form['password']
 
-        if form.validate_on_submit():
-            user.password = generate_password_hash(password, method='sha256')
-            db.session.commit()
-            flash('Your password was changed. ')
+            if request.form['password'] != request.form['password2']:
+                flash('Passwords are not the same.')
 
-    return render_template("auth/reset_password.html", form=form, user=user)
+            if form.validate_on_submit():
+                user.password = generate_password_hash(password, method='sha256')
+                user.password_code = ''
+                db.session.commit()
+                flash('Your password was changed. ')
+
+        return render_template("auth/reset_password.html", form=form, user=user)
+
+    else:
+        return "No access"
 
 
 def send_email(user):

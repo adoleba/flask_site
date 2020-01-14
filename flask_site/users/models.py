@@ -30,6 +30,7 @@ class User(db.Model, UserMixin):
     created = db.Column(db.DateTime, default=datetime.utcnow())
     firstname = db.Column(db.String(50))
     lastname = db.Column(db.String(50))
+    password_code = db.Column(db.String(50))
     posts = db.relationship("Post", back_populates="user")
     role = db.relationship('Role', secondary=users_roles, backref=db.backref('users', lazy='dynamic'))
 

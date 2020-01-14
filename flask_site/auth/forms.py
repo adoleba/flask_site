@@ -1,4 +1,4 @@
-from flask_wtf import FlaskForm, Form
+from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Regexp, EqualTo, Email
 
@@ -18,10 +18,10 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 
-class ForgotForm(Form):
+class ForgotForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
 
 
-class PasswordResetForm(Form):
+class PasswordResetForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password2')])

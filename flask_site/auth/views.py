@@ -99,6 +99,18 @@ def forgot_password():
 def reset_password(username, code):
     user = User.query.filter_by(username=username).first()
     form = PasswordResetForm()
+
+    if request.method == 'POST':
+        password = request.form['password']
+
+        if request.form['password'] != request.form['password2']:
+            flash('Passwords are not the same.')
+
+        if form.validate_on_submit():
+            user.password = generate_password_hash(password, method='sha256')
+            db.session.commit()
+            flash('Your password was changed. ')
+
     return render_template("auth/reset_password.html", form=form, user=user)
 
 

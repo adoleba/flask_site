@@ -109,12 +109,16 @@ def reset_password(username, code):
 
             if request.form['password'] != request.form['password2']:
                 flash('Passwords are not the same.')
+                password_compliance = False
+            else:
+                password_compliance = True
 
-            if form.validate_on_submit():
-                user.password = generate_password_hash(password, method='sha256')
-                user.password_code = ''
-                db.session.commit()
-                flash('Your password was changed. You can log in')
+            if password_compliance:
+                if form.validate_on_submit():
+                    user.password = generate_password_hash(password, method='sha256')
+                    user.password_code = ''
+                    db.session.commit()
+                    flash('Your password was changed. You can log in')
 
         return render_template("auth/reset_password.html", form=form, user=user)
 

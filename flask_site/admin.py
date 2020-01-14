@@ -63,8 +63,8 @@ class AdminUserView(ModelView):
     column_searchable_list = ('username',)
     column_default_sort = ('username', True)
     page_size = 20
-    column_exclude_list = ['password', 'about_me']
-    form_excluded_columns = ('role', 'password', 'created', 'posts')
+    column_exclude_list = ['password', 'about_me', 'password_code']
+    form_excluded_columns = ('role', 'password', 'created', 'posts', 'password_code')
 
     @property
     def can_create(self):

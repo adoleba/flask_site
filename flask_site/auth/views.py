@@ -80,7 +80,9 @@ def registered():
 
 @auth.route('/forgot', methods=["GET", "POST"])
 def forgot_password():
+    pages = UniversalPage.query.all()
     form = ForgotForm()
+
     if form.validate_on_submit():
         email = request.form['email']
         user = User.query.filter_by(email=email).first()
@@ -94,11 +96,12 @@ def forgot_password():
             send_email(user)
 
         flash('You will receive a password reset email if we find email in our system')
-    return render_template("auth/forgot_password.html", form=form)
+    return render_template("auth/forgot_password.html", form=form, pages=pages)
 
 
 @auth.route('/password_reset/<username>/<code>', methods=["GET", "POST"])
 def reset_password(username, code):
+    pages = UniversalPage.query.all()
     user = User.query.filter_by(username=username).first()
     form = PasswordResetForm()
 
@@ -122,7 +125,7 @@ def reset_password(username, code):
 
         return render_template("auth/reset_password.html", form=form, user=user)
 
-    return render_template("auth/invalid_password_code.html", form=form, user=user)
+    return render_template("auth/invalid_password_code.html", form=form, user=user, pages=pages)
 
 
 def send_email(user):

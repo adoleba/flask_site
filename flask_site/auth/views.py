@@ -114,12 +114,11 @@ def reset_password(username, code):
                 user.password = generate_password_hash(password, method='sha256')
                 user.password_code = ''
                 db.session.commit()
-                flash('Your password was changed. ')
+                flash('Your password was changed. You can log in')
 
         return render_template("auth/reset_password.html", form=form, user=user)
 
-    else:
-        return "No access"
+    return render_template("auth/invalid_password_code.html", form=form, user=user)
 
 
 def send_email(user):

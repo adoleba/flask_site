@@ -48,7 +48,7 @@ class AdminPostView(ModelView):
             model.user_name = current_user.username
 
     def get_query(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return super().get_query()
         return super().get_query().filter(Post.user_name == current_user.username)
 
@@ -68,16 +68,16 @@ class AdminUserView(ModelView):
 
     @property
     def can_create(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
     @property
     def can_delete(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
     def get_query(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return super().get_query()
         return super().get_query().filter(User.username == current_user.username)
 
@@ -89,7 +89,7 @@ class AdminAboutView(ModelView):
 
     @property
     def can_edit(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
 
@@ -100,7 +100,7 @@ class AdminPageView(ModelView):
 
     @property
     def can_edit(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
 
@@ -111,7 +111,7 @@ class ContactThankYouAdminPageView(ModelView):
 
     @property
     def can_edit(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
 
@@ -120,17 +120,17 @@ class RolePageView(ModelView):
 
     @property
     def can_edit(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
     @property
     def can_delete(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
     @property
     def can_create(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
 
@@ -141,15 +141,15 @@ class UniversalPageAdmin(ModelView):
 
     @property
     def can_edit(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
     @property
     def can_delete(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True
 
     @property
     def can_create(self):
-        if login.current_user.role == ['superuser']:
+        if 'superuser' in login.current_user.role:
             return True

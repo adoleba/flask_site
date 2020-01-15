@@ -9,9 +9,18 @@
                     Previous
                 </a>
             </li>
+            <li><a href="?page=1">1</a></li>
+
         {% endif %}
 
+        <li class="active"><a href="?page={{ posts.page}}">{{ posts.page }}</a></li>
+
         {% if posts.has_next %}
+            <li>
+                <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}
+                </a>
+            </li>
+
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.next_num) }}">Next
                     <i class="fas fa-long-arrow-alt-right margin-5px-left xs-display-none"></i>

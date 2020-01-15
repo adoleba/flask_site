@@ -22,7 +22,7 @@ My blog
         <div class="container">
             <div class="row equalize xs-equalize-auto">
 
-            {% for post in posts %}
+            {% for post in posts.items %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 margin-30px-bottom xs-text-center wow fadeInUp">
                     <div class="blog-post bg-light-gray inner-match-height">
                         <div class="post-details padding-40px-all sm-padding-20px-all">
@@ -47,6 +47,13 @@ My blog
                 </div>
                 {% endfor %}
             </div>
+            {% if posts.has_prev %}
+                <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">&lt;&lt; Newer posts</a>
+            {% endif %}
+            {% if posts.has_next %}
+                <a href="{{ url_for('blog.blog_page', page=posts.next_num) }}">Older posts &gt;&gt;</a>
+            {% endif %}
+
         </div>
     </section>
 

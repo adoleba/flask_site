@@ -1,6 +1,7 @@
 from flask import url_for, redirect, request
 from flask_admin.contrib.sqla import ModelView
 import flask_login as login
+from flask_admin.menu import MenuLink
 from flask_user import current_user
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
@@ -153,3 +154,8 @@ class UniversalPageAdmin(ModelView):
     def can_create(self):
         if 'superuser' in login.current_user.role:
             return True
+
+
+class LogoutAdminMenuLink(MenuLink):
+    def is_accessible(self):
+        return current_user.is_authenticated

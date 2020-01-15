@@ -47,13 +47,7 @@ My blog
                 </div>
                 {% endfor %}
             </div>
-            {% if posts.has_prev %}
-                <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">&lt;&lt; Newer posts</a>
-            {% endif %}
-            {% if posts.has_next %}
-                <a href="{{ url_for('blog.blog_page', page=posts.next_num) }}">Older posts &gt;&gt;</a>
-            {% endif %}
-
+            {% include 'blog/blog_pagination.html' %}
         </div>
     </section>
 

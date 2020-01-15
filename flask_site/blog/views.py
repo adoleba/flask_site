@@ -22,8 +22,3 @@ class PostPage(PageView):
             'post': Post.query.get_or_404(id)
         })
         return render_template('blog/post_page.html', **ctx)
-
-
-
-    #next_url = url_for('index', page=posts.next_num) if posts.has_next else None
-    #prev_url = url_for('index', page=posts.prev_num) if posts.has_prev else None

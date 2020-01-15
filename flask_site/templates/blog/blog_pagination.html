@@ -1,0 +1,24 @@
+<div class=" text-center margin-30px-top sm-margin-20px-top wow fadeInUp">
+    <div class="pagination text-small text-uppercase text-extra-dark-gray">
+        <ul>
+
+        {% if posts.has_prev %}
+            <li>
+                <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">
+                    <i class="fas fa-long-arrow-alt-left margin-5px-right xs-display-none"></i>
+                    Previous
+                </a>
+            </li>
+        {% endif %}
+
+        {% if posts.has_next %}
+            <li>
+                <a href="{{ url_for('blog.blog_page', page=posts.next_num) }}">Next
+                    <i class="fas fa-long-arrow-alt-right margin-5px-left xs-display-none"></i>
+                </a>
+            </li>
+        {% endif %}
+        </ul>
+
+    </div>
+</div>

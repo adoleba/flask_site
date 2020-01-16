@@ -11,8 +11,11 @@ class BlogPage(PageView):
         page = request.args.get('page', 1, type=int)
         ctx.update({
             'posts': Post.query.order_by(Post.timestamp.desc()).paginate(page, config.Config.POSTS_PER_PAGE, False),
+            'current_page_plus_1': page + 1,
+            'current_page_plus_2': page + 2,
         })
-        return render_template('blog/blog_page.html', **ctx)
+        penult_page = ctx['posts'].pages - 1
+        return render_template('blog/blog_page.html', penult_page=penult_page, **ctx)
 
 
 class PostPage(PageView):

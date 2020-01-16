@@ -28,11 +28,24 @@
 
         {% endif %}
 
-        <li class="active"><a href="?page={{ posts.page}}">{{ posts.page }}</a></li>
+        <li class="active"><a>{{ posts.page }}</a></li>
 
         {% if posts.has_next %}
-            <li><a href="?page={{ posts.page|add(1) }}">{{ posts.page|add(1) }}</a></li>
-            <li><a href="?page={{ posts.page|add(2) }}">{{ posts.page|add(2) }}</a></li>
+            {% if current_page_plus_1 < posts.pages %}
+                <!--ifek wydaje się zbędny, ale konieczny, żeby nie wysypało się przy przedostaniej stronie -->
+
+                <li><a href="?page={{ posts.page|add(1) }}">{{ posts.page|add(1) }}</a></li>
+
+                {% if current_page_plus_2 <= penult_page %}
+                    <li><a href="?page={{ posts.page|add(2) }}">{{ posts.page|add(2) }}</a></li>
+
+                    {% if current_page_plus_2 != penult_page %}
+                        <li class="active"><a>...</a></li>
+                    {% endif %}
+
+                {% endif %}
+
+            {% endif %}
 
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}

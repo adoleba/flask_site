@@ -3,6 +3,7 @@
         <ul>
 
         {% if posts.has_prev %}
+
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">
                     <i class="fas fa-long-arrow-alt-left margin-5px-right xs-display-none"></i>
@@ -11,7 +12,19 @@
             </li>
             <li><a href="?page=1">1</a></li>
 
-            <li><a href="?page={{ posts.page}}">{{ 1|subtract(2) }}</a></li>
+            {% if posts.page == 3 %}
+                <li><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+            {% endif %}
+
+            {% if posts.page > 3 %}
+                {% if posts.page != 4%}
+                    <li class="active"><a>...</a></li>
+                {% endif %}
+
+                <li><a href="?page={{ posts.page|subtract(2) }}">{{ posts.page|subtract(2) }}</a></li>
+                <li><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+
+            {% endif %}
 
         {% endif %}
 

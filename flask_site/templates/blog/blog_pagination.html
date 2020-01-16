@@ -6,10 +6,11 @@
 
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">
-                    <i class="fas fa-long-arrow-alt-left margin-5px-right xs-display-none"></i>Previous
+                    <i class="fas fa-long-arrow-alt-left margin-5px-right"></i>Previous
                 </a>
             </li>
-            <li><a href="?page=1">1</a></li>
+
+            <li class="hidden-xs"><a href="?page=1">1</a></li>
 
             {% if posts.page == 3 %}
                 <li><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
@@ -17,11 +18,11 @@
 
             {% if posts.page > 3 %}
                 {% if posts.page != 4%}
-                    <li class="active"><a>...</a></li>
+                    <li class="active hidden-xs"><a>...</a></li>
                 {% endif %}
 
-                <li><a href="?page={{ posts.page|subtract(2) }}">{{ posts.page|subtract(2) }}</a></li>
-                <li><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+                <li class="hidden-xs"><a href="?page={{ posts.page|subtract(2) }}">{{ posts.page|subtract(2) }}</a></li>
+                <li class="hidden-xs"><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
 
             {% endif %}
 
@@ -33,26 +34,26 @@
             {% if current_page_plus_1 < posts.pages %}
                 <!--ifek wydaje się zbędny, ale konieczny, żeby nie wysypało się przy przedostaniej stronie -->
 
-                <li><a href="?page={{ posts.page|add(1) }}">{{ posts.page|add(1) }}</a></li>
+                <li  class="hidden-xs"><a href="?page={{ posts.page|add(1) }}">{{ posts.page|add(1) }}</a></li>
 
                 {% if current_page_plus_2 <= penult_page %}
-                    <li><a href="?page={{ posts.page|add(2) }}">{{ posts.page|add(2) }}</a></li>
+                    <li  class="hidden-xs"><a href="?page={{ posts.page|add(2) }}">{{ posts.page|add(2) }}</a></li>
 
                     {% if current_page_plus_2 != penult_page %}
-                        <li class="active"><a>...</a></li>
+                        <li class="active hidden-xs"><a>...</a></li>
                     {% endif %}
 
                 {% endif %}
 
             {% endif %}
 
-            <li>
+            <li class="hidden-xs">
                 <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}</a>
             </li>
 
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.next_num) }}">Next
-                    <i class="fas fa-long-arrow-alt-right margin-5px-left xs-display-none"></i>
+                    <i class="fas fa-long-arrow-alt-right margin-5px-left"></i>
                 </a>
             </li>
         {% endif %}

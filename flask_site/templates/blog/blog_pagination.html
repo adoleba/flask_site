@@ -31,6 +31,9 @@
         <li class="active"><a href="?page={{ posts.page}}">{{ posts.page }}</a></li>
 
         {% if posts.has_next %}
+            <li><a href="?page={{ posts.page|add(1) }}">{{ posts.page|add(1) }}</a></li>
+            <li><a href="?page={{ posts.page|add(2) }}">{{ posts.page|add(2) }}</a></li>
+
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}
                 </a>

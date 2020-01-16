@@ -4,7 +4,7 @@ from flask_admin.menu import MenuLink
 from flask_site.about.models import About
 from flask_site.admin import AdminPostView, AdminUserView, AdminPageView, ContactThankYouAdminPageView,\
     UniversalPageAdmin, RolePageView, LogoutAdminMenuLink
-from flask_site.common.filters import subtract
+from flask_site.common.filters import subtract, add
 from flask_site.contact.models import Contact, ContactThankYou
 from flask_site.main.models import Home
 from flask_site.universal_page.models import UniversalPage
@@ -25,6 +25,7 @@ admin.add_link(LogoutAdminMenuLink(name='Logout', url='/logout'))
 admin.add_link(MenuLink(name="Home Page", url='/'))
 
 app.jinja_env.filters['subtract'] = subtract
+app.jinja_env.filters['add'] = add
 
 if __name__ == '__main__':
     app.run()

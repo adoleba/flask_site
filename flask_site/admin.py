@@ -1,6 +1,7 @@
 from flask import url_for, redirect, request
 from flask_admin.contrib.sqla import ModelView
 import flask_login as login
+from flask_admin.menu import MenuLink
 from flask_user import current_user
 from wtforms import TextAreaField
 from wtforms.widgets import TextArea
@@ -22,6 +23,13 @@ class CKTextAreaWidget(TextArea):
 
 class CKTextAreaField(TextAreaField):
     widget = CKTextAreaWidget()
+
+
+class SuperUserView(ModelView):
+
+    def is_accessible(self):
+        if 'superuser' in login.current_user.role:
+            return True
 
 
 class AdminPostView(ModelView):
@@ -63,8 +71,8 @@ class AdminUserView(ModelView):
     column_searchable_list = ('username',)
     column_default_sort = ('username', True)
     page_size = 20
-    column_exclude_list = ['password', 'about_me']
-    form_excluded_columns = ('role', 'password', 'created', 'posts')
+    column_exclude_list = ['password', 'about_me', 'password_code']
+    form_excluded_columns = ('role', 'password', 'created', 'posts', 'password_code')
 
     @property
     def can_create(self):
@@ -82,74 +90,28 @@ class AdminUserView(ModelView):
         return super().get_query().filter(User.username == current_user.username)
 
 
-class AdminAboutView(ModelView):
+class AdminPageView(SuperUserView):
     can_delete = False
     can_create = False
     column_list = ('title', 'edited')
 
-    @property
-    def can_edit(self):
-        if 'superuser' in login.current_user.role:
-            return True
 
-
-class AdminPageView(ModelView):
+class ContactThankYouAdminPageView(SuperUserView):
     can_delete = False
     can_create = False
-    column_list = ('title', 'edited')
-
-    @property
-    def can_edit(self):
-        if 'superuser' in login.current_user.role:
-            return True
-
-
-class ContactThankYouAdminPageView(ModelView):
-    can_delete = False
-    can_create = True
     column_list = ('intro', 'edited')
 
-    @property
-    def can_edit(self):
-        if 'superuser' in login.current_user.role:
-            return True
 
-
-class RolePageView(ModelView):
+class RolePageView(SuperUserView):
     column_list = ('name', 'description')
 
-    @property
-    def can_edit(self):
-        if 'superuser' in login.current_user.role:
-            return True
 
-    @property
-    def can_delete(self):
-        if 'superuser' in login.current_user.role:
-            return True
-
-    @property
-    def can_create(self):
-        if 'superuser' in login.current_user.role:
-            return True
-
-
-class UniversalPageAdmin(ModelView):
+class UniversalPageAdmin(SuperUserView):
 
     inline_models = (BlockQuoteWithHeaderForm(), ThreeColumnsWithHeadersForm(),
                      WhiteHeaderWithButtonForm(), FaqForm(), SmallGreyHeaderForm(), GreyHeaderForm(), BlockQuoteForm(),)
 
-    @property
-    def can_edit(self):
-        if 'superuser' in login.current_user.role:
-            return True
 
-    @property
-    def can_delete(self):
-        if 'superuser' in login.current_user.role:
-            return True
-
-    @property
-    def can_create(self):
-        if 'superuser' in login.current_user.role:
-            return True
+class LogoutAdminMenuLink(MenuLink):
+    def is_accessible(self):
+        return current_user.is_authenticated

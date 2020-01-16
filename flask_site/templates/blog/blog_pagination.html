@@ -6,8 +6,7 @@
 
             <li>
                 <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">
-                    <i class="fas fa-long-arrow-alt-left margin-5px-right xs-display-none"></i>
-                    Previous
+                    <i class="fas fa-long-arrow-alt-left margin-5px-right xs-display-none"></i>Previous
                 </a>
             </li>
             <li><a href="?page=1">1</a></li>
@@ -48,8 +47,7 @@
             {% endif %}
 
             <li>
-                <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}
-                </a>
+                <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}</a>
             </li>
 
             <li>

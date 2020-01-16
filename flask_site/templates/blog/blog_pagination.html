@@ -11,6 +11,8 @@
             </li>
             <li><a href="?page=1">1</a></li>
 
+            <li><a href="?page={{ posts.page}}">{{ 1|subtract(2) }}</a></li>
+
         {% endif %}
 
         <li class="active"><a href="?page={{ posts.page}}">{{ posts.page }}</a></li>

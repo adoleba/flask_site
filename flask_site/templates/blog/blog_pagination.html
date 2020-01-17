@@ -1,0 +1,68 @@
+{% set second_last_page = posts.pages - 1 %}
+{% set next_page = posts.page + 1 %}
+{% set second_next_page = posts.page + 2 %}
+
+
+<div class=" text-center margin-30px-top sm-margin-20px-top wow fadeInUp">
+    <div class="pagination text-small text-uppercase text-extra-dark-gray">
+        <ul>
+
+        {% if posts.has_prev %}
+
+            <li>
+                <a href="{{ url_for('blog.blog_page', page=posts.prev_num) }}">
+                    <i class="fas fa-long-arrow-alt-left margin-5px-right"></i>Previous
+                </a>
+            </li>
+
+            <li class="hidden-xs"><a href="?page=1">1</a></li>
+
+            {% if posts.page == 3 %}
+                <li><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+            {% endif %}
+
+            {% if posts.page > 3 %}
+                {% if posts.page != 4%}
+                    <li class="active hidden-xs"><a>...</a></li>
+                {% endif %}
+
+                <li class="hidden-xs"><a href="?page={{ posts.page|subtract(2) }}">{{ posts.page|subtract(2) }}</a></li>
+                <li class="hidden-xs"><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+
+            {% endif %}
+
+        {% endif %}
+
+        <li class="active"><a>{{ posts.page }}</a></li>
+
+        {% if posts.has_next %}
+            {% if next_page < posts.pages %}
+                <!--ifek wydaje się zbędny, ale konieczny, żeby nie wysypało się przy przedostaniej stronie -->
+
+                <li  class="hidden-xs"><a href="?page={{ next_page }}">{{ next_page }}</a></li>
+
+                {% if second_next_page <= second_last_page %}
+                    <li  class="hidden-xs"><a href="?page={{ second_next_page }}">{{ second_next_page }}</a></li>
+
+                    {% if second_next_page != second_last_page %}
+                        <li class="active hidden-xs"><a>...</a></li>
+                    {% endif %}
+
+                {% endif %}
+
+            {% endif %}
+
+            <li class="hidden-xs">
+                <a href="{{ url_for('blog.blog_page', page=posts.pages) }}">{{ posts.pages }}</a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('blog.blog_page', page=posts.next_num) }}">Next
+                    <i class="fas fa-long-arrow-alt-right margin-5px-left"></i>
+                </a>
+            </li>
+        {% endif %}
+        </ul>
+
+    </div>
+</div>

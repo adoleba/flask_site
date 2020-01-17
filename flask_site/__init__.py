@@ -57,6 +57,7 @@ def create_app():
     from flask_site.main import views, models
     from flask_site.contact import views, models
     from flask_site.universal_page import views, models
+    from flask_site.common import filters
 
     @login_manager.user_loader
     def load_user(user_id):

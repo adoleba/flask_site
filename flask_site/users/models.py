@@ -1,9 +1,9 @@
 from datetime import datetime
+
 from flask_login import UserMixin
 from flask_security import RoleMixin
 
 from flask_site import db
-
 
 users_roles = db.Table(
     'users_roles',

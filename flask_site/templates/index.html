@@ -79,7 +79,7 @@ My blog - welcome
                         <div class="blog-post bg-light-gray inner-match-height">
                             <div class="post-details padding-40px-all sm-padding-20px-all">
                                 <a href="{{ url_for('blog.post', year=post.timestamp.year, month=post.timestamp.month,
-                                day=post.timestamp.day, id=post.id) }}" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
+                                day=post.timestamp.day, slug=post.slugified_title, id=post.id) }}" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
                                     {{post.title}}
                                 </a>
                                 <p>

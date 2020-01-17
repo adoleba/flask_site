@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from slugify import slugify
+
 from flask_site import db
 
 
@@ -12,6 +14,10 @@ class Post(db.Model):
 
     user_name = db.Column(db.Integer, db.ForeignKey('user.username'))
     user = db.relationship("User", back_populates="posts")
+
+    @property
+    def slugified_title(self):
+        return slugify(self.title)
 
     def __repr__(self):
         return 'Post {}'.format(self.title)

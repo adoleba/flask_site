@@ -26,7 +26,9 @@ My blog
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 margin-30px-bottom xs-text-center wow fadeInUp">
                     <div class="blog-post bg-light-gray inner-match-height">
                         <div class="post-details padding-40px-all sm-padding-20px-all">
-                            <a href="{{ url_for('blog.post', id=post.id) }}" class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
+                            <a href="{{ url_for('blog.post', year=post.timestamp.year, month='{:02d}'.format(post.timestamp.month),
+                                slug=post.slugified_title, id=post.id) }}"
+                                class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
                                 {{post.title}}
                             </a>
                             <p>

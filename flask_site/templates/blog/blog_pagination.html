@@ -1,3 +1,8 @@
+{% set second_last_page = posts.pages - 1 %}
+{% set next_page = posts.page + 1 %}
+{% set second_next_page = posts.page + 2 %}
+
+
 <div class=" text-center margin-30px-top sm-margin-20px-top wow fadeInUp">
     <div class="pagination text-small text-uppercase text-extra-dark-gray">
         <ul>
@@ -31,15 +36,15 @@
         <li class="active"><a>{{ posts.page }}</a></li>
 
         {% if posts.has_next %}
-            {% if current_page_plus_1 < posts.pages %}
+            {% if next_page < posts.pages %}
                 <!--ifek wydaje się zbędny, ale konieczny, żeby nie wysypało się przy przedostaniej stronie -->
 
-                <li  class="hidden-xs"><a href="?page={{ posts.page|add(1) }}">{{ posts.page|add(1) }}</a></li>
+                <li  class="hidden-xs"><a href="?page={{ next_page }}">{{ next_page }}</a></li>
 
-                {% if current_page_plus_2 <= penult_page %}
-                    <li  class="hidden-xs"><a href="?page={{ posts.page|add(2) }}">{{ posts.page|add(2) }}</a></li>
+                {% if second_next_page <= second_last_page %}
+                    <li  class="hidden-xs"><a href="?page={{ second_next_page }}">{{ second_next_page }}</a></li>
 
-                    {% if current_page_plus_2 != penult_page %}
+                    {% if second_next_page != second_last_page %}
                         <li class="active hidden-xs"><a>...</a></li>
                     {% endif %}
 

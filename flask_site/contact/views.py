@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, current_app
+
 from flask_mail import Message
 
 from flask_site import mail

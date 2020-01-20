@@ -1,11 +1,11 @@
-from flask_site.users import users
-
 from flask import render_template
+
 from flask_login import login_required, current_user
 
-from flask_site.users.models import User
 from flask_site.blog.models import Post
 from flask_site.universal_page.models import UniversalPage
+from flask_site.users import users
+from flask_site.users.models import User
 
 
 @users.route('/profile')

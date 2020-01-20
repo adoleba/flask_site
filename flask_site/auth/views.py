@@ -1,16 +1,15 @@
-from flask_mail import Message
-
-from flask_site.auth import auth
+import uuid
 
 from flask import render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
+from flask_mail import Message
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
-from flask_site.users.models import User
 from flask_site import db, mail
+from flask_site.auth import auth
+from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
 from flask_site.universal_page.models import UniversalPage
-import uuid
+from flask_site.users.models import User
 
 
 @auth.route('/login', methods=["GET", "POST"])

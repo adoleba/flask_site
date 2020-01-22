@@ -54,7 +54,7 @@ def create_app():
     from flask_site.users.models import User
     from flask_site.blog.models import Post
     from flask_site.about import views, models
-    from flask_site.main import views, models
+    from flask_site.main import views, models, errors
     from flask_site.contact import views, models
     from flask_site.universal_page import views, models
     from flask_site.common import filters

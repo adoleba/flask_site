@@ -8,6 +8,7 @@ from flask_site.admin import AdminPostView, AdminUserView, AdminPageView, Contac
 from flask_site.blog.models import Post
 from flask_site.common.filters import subtract
 from flask_site.contact.models import Contact, ContactThankYou
+from flask_site.main.errors import page_not_found
 from flask_site.main.models import Home
 from flask_site.universal_page.models import UniversalPage
 from flask_site.users.models import User, Role
@@ -25,6 +26,7 @@ admin.add_link(LogoutAdminMenuLink(name='Logout', url='/logout'))
 admin.add_link(MenuLink(name="Home Page", url='/'))
 
 app.jinja_env.filters['subtract'] = subtract
+app.register_error_handler(404, page_not_found)
 
 if __name__ == '__main__':
     app.run()

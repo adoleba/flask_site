@@ -8,7 +8,7 @@ class Config:
     MAIL_USE_TLS = 1
     MAIL_USERNAME = 'django.ania@gmail.com'
     MAIL_PASSWORD = '0987poiu'
-    POSTS_PER_PAGE = 1
+    POSTS_PER_PAGE = 6
 
 
 class DevelopmentConfig(Config):

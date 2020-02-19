@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-My blog - About
+    Sample company site - about
 {% endblock %}
 
 {% block content %}
@@ -38,7 +38,7 @@ My blog - About
                                 {{ about.black_intro }}
                             </h6>
                             <p>{{ about.intro_description}} </p>
-                            <a href="#" class="btn btn-dark-gray btn-small text-extra-small btn-rounded margin-5px-top">Contact Us</a>
+                            <a href="{{ url_for('contact_us.contact_us') }}" class="btn btn-dark-gray btn-small text-extra-small btn-rounded margin-5px-top">Contact Us</a>
                         </div>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ class SuperUserView(ModelView):
 
 class AdminPostView(ModelView):
 
-    form_excluded_columns = ('user_name', 'user')
+    form_excluded_columns = ('user_name', 'user', 'timestamp')
     column_exclude_list = ('body', )
     column_searchable_list = ('title',)
     column_default_sort = ('timestamp', True)
@@ -74,6 +74,7 @@ class AdminUserView(ModelView):
     page_size = 20
     column_exclude_list = ['password', 'about_me', 'password_code']
     form_excluded_columns = ('role', 'password', 'created', 'posts', 'password_code')
+    form_overrides = {'about_me': TextAreaField}
 
     @property
     def can_create(self):
@@ -95,12 +96,14 @@ class AdminPageView(SuperUserView):
     can_delete = False
     can_create = False
     column_list = ('title', 'edited')
+    form_excluded_columns = 'edited'
 
 
 class ContactThankYouAdminPageView(SuperUserView):
     can_delete = False
     can_create = False
     column_list = ('intro', 'edited')
+    form_excluded_columns = 'edited'
 
 
 class RolePageView(SuperUserView):

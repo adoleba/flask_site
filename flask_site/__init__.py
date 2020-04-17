@@ -15,11 +15,12 @@ mail = Mail()
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
 
     config_name = os.getenv('FLASK_ENV')
 
     app.config.from_object(config.config[config_name])
+    app.config.from_pyfile('application.cfg', silent=True)
 
     db.init_app(app)
     login_manager = LoginManager()

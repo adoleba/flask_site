@@ -21,8 +21,15 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "postgresql:///flask"
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql:///flask"
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+
+
+config = {
+    "development": "flask_site.config.DevelopmentConfig",
+    "testing": "flask_site.config.TestingConfig",
+    "production": "flask_site.config.ProductionConfig",
+}

@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -13,14 +15,12 @@ mail = Mail()
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
 
-    if app.env == 'production':
-        app.config.from_object(config.ProductionConfig)
-    elif app.env == 'testing':
-        app.config.from_object(config.TestingConfig)
-    else:
-        app.config.from_object(config.DevelopmentConfig)
+    config_name = os.getenv('FLASK_ENV')
+
+    app.config.from_object(config.config[config_name])
+    app.config.from_pyfile('application.cfg', silent=True)
 
     db.init_app(app)
     login_manager = LoginManager()

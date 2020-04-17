@@ -19,6 +19,7 @@ flask-user = "==1.0.2.2"
 python-slugify = "==4.0.0"
 werkzeug = "==0.16.1"
 psycopg2 = "==2.8.5"
+gunicorn = "==20.0.4"
 
 [requires]
 python_version = "==3.7"

@@ -17,6 +17,7 @@ flask-mail = "==0.9.1"
 flask-security = "==3.0.0"
 flask-user = "==1.0.2.2"
 python-slugify = "==4.0.0"
+werkzeug = "==0.16.1"
 
 [requires]
 python_version = "==3.7"

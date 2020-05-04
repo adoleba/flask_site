@@ -10,7 +10,7 @@ from wtforms.widgets import TextArea
 from flask_site.blog.models import Post
 from flask_site.universal_page.admin import BlockQuoteWithHeaderForm, ThreeColumnsWithHeadersForm, \
     WhiteHeaderWithButtonForm, FaqForm, SmallGreyHeaderForm, GreyHeaderForm, BlockQuoteForm
-from flask_site.users.models import User
+from flask_site.users.models import Author
 
 
 class CKTextAreaWidget(TextArea):
@@ -35,7 +35,7 @@ class SuperUserView(ModelView):
 
 class AdminPostView(ModelView):
 
-    form_excluded_columns = ('user_name', 'user', 'timestamp')
+    form_excluded_columns = ('author_name', 'author', 'timestamp')
     column_exclude_list = ('body', )
     column_searchable_list = ('title',)
     column_default_sort = ('timestamp', True)
@@ -54,12 +54,12 @@ class AdminPostView(ModelView):
 
     def on_model_change(self, form, model, is_created):
         if is_created:
-            model.user_name = current_user.username
+            model.author_name = current_user.username
 
     def get_query(self):
         if 'superuser' in login.current_user.role:
             return super().get_query()
-        return super().get_query().filter(Post.user_name == current_user.username)
+        return super().get_query().filter(Post.author_name == current_user.username)
 
     def is_accessible(self):
         return login.current_user.is_authenticated
@@ -89,7 +89,7 @@ class AdminUserView(ModelView):
     def get_query(self):
         if 'superuser' in login.current_user.role:
             return super().get_query()
-        return super().get_query().filter(User.username == current_user.username)
+        return super().get_query().filter(Author.username == current_user.username)
 
 
 class AdminPageView(SuperUserView):

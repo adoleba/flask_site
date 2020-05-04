@@ -10,6 +10,7 @@ from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
 from flask_site import config
+from flask_site.config import DevelopmentConfig
 
 db = SQLAlchemy()
 manager = Manager()
@@ -33,7 +34,7 @@ def create_app():
     manager.add_command('db', MigrateCommand)
 
     from flask_site.blog.models import Post
-    from flask_site.users.models import User
+    from flask_site.users.models import Author
     from flask_site.about.models import About
     from flask_site.admin import AdminPostView, AdminUserView, AdminPageView, ContactThankYouAdminPageView, \
         UniversalPageAdmin, RolePageView, LogoutAdminMenuLink
@@ -44,7 +45,7 @@ def create_app():
 
     admin = Admin(app, index_view=AdminPostView(Post, db.session, url='/admin'))
 
-    admin.add_view(AdminUserView(User, db.session))
+    admin.add_view(AdminUserView(Author, db.session))
     admin.add_view(AdminPageView(About, db.session))
     admin.add_view(AdminPageView(Home, db.session))
     admin.add_view(AdminPageView(Contact, db.session))
@@ -86,7 +87,7 @@ def create_app():
     app.jinja_env.filters['subtract'] = subtract
 
     @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
+    def load_user(author_id):
+        return Author.query.get(int(author_id))
 
     return app

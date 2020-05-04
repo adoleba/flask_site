@@ -25,8 +25,8 @@
                                 </li>
                                 <li>
                                     <span class="text-dark-gray">by
-                                        <a href="{{ url_for('users.user_posts', username=post.user.username) }}">
-                                            {{post.user.username}}
+                                        <a href="{{ url_for('users.user_posts', username=post.author.username) }}">
+                                            {{post.author.username}}
                                         </a>
                                     </span>
                                 </li>
@@ -60,8 +60,8 @@
                     <div class="col-md-10 col-sm-12 col-xs-12 center-col margin-50px-top sm-margin-30px-top wow fadeInUp">
                         <div class="display-table width-100 border-all border-color-extra-light-gray padding-50px-all sm-padding-30px-all xs-padding-20px-all">
                             <div class="padding-40px-left display-table-cell vertical-align-top last-paragraph-no-margin xs-no-padding-left xs-display-block xs-text-center">
-                                <a href="{{ url_for('users.user_posts', username=post.user.username) }}" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 margin-10px-bottom display-inline-block text-small">{{post.user.firstname}} {{post.user.lastname}}</a>
-                                <p>{{post.user.about_me}}</p>
+                                <a href="{{ url_for('users.user_posts', username=post.author.username) }}" class="text-extra-dark-gray text-uppercase alt-font font-weight-600 margin-10px-bottom display-inline-block text-small">{{post.author.firstname}} {{post.author.lastname}}</a>
+                                <p>{{post.author.about_me}}</p>
                             </div>
                         </div>
                     </div>

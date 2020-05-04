@@ -5,9 +5,9 @@ from flask_security import RoleMixin
 
 from flask_site import db
 
-users_roles = db.Table(
-    'users_roles',
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+authors_roles = db.Table(
+    'authors_roles',
+    db.Column('author_id', db.Integer(), db.ForeignKey('author.id')),
     db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
 )
 
@@ -21,7 +21,7 @@ class Role(db.Model, RoleMixin):
         return self.name
 
 
-class User(db.Model, UserMixin):
+class Author(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True)
     email = db.Column(db.String(120), unique=True)
@@ -31,8 +31,8 @@ class User(db.Model, UserMixin):
     firstname = db.Column(db.String(50))
     lastname = db.Column(db.String(50))
     password_code = db.Column(db.String(50))
-    posts = db.relationship("Post", back_populates="user")
-    role = db.relationship('Role', secondary=users_roles, backref=db.backref('users', lazy='dynamic'))
+    posts = db.relationship("Post", back_populates="author")
+    role = db.relationship('Role', secondary=authors_roles, backref=db.backref('authors', lazy='dynamic'))
 
     def __str__(self):
         return self.username

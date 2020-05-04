@@ -9,7 +9,7 @@ from flask_site import db, mail
 from flask_site.auth import auth
 from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
 from flask_site.universal_page.models import UniversalPage
-from flask_site.users.models import User
+from flask_site.users.models import Author
 
 
 @auth.route('/login', methods=["GET", "POST"])
@@ -21,7 +21,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        user = User.query.filter_by(username=username).first()
+        user = Author.query.filter_by(username=username).first()
 
         if not user or not check_password_hash(user.password, password):
             flash('Please check your login details and try again.')
@@ -51,11 +51,11 @@ def signup():
         username = request.form['username']
         password = request.form['password']
 
-        user_verify_email = User.query.filter_by(email=email).first()
+        user_verify_email = Author.query.filter_by(email=email).first()
         if user_verify_email:
             flash('Email address already exists.')
 
-        user_verify_username = User.query.filter_by(username=username).first()
+        user_verify_username = Author.query.filter_by(username=username).first()
         if user_verify_username:
             flash('Username already exists.')
 
@@ -63,7 +63,7 @@ def signup():
             flash('Passwords are not the same.')
 
         if form.validate_on_submit():
-            new_user = User(email=email, username=username, password=generate_password_hash(password, method='sha256'))
+            new_user = Author(email=email, username=username, password=generate_password_hash(password, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('auth.registered'))
@@ -84,7 +84,7 @@ def forgot_password():
 
     if form.validate_on_submit():
         email = request.form['email']
-        user = User.query.filter_by(email=email).first()
+        user = Author.query.filter_by(email=email).first()
         if user:
             code = str(uuid.uuid4())
             user.change_configuration = {
@@ -101,7 +101,7 @@ def forgot_password():
 @auth.route('/password_reset/<username>/<code>', methods=["GET", "POST"])
 def reset_password(username, code):
     pages = UniversalPage.query.all()
-    user = User.query.filter_by(username=username).first()
+    user = Author.query.filter_by(username=username).first()
     form = PasswordResetForm()
 
     if code == user.password_code:

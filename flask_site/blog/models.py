@@ -12,8 +12,8 @@ class Post(db.Model):
     body = db.Column(db.Text(), nullable=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
-    user_name = db.Column(db.String, db.ForeignKey('user.username'))
-    user = db.relationship("User", back_populates="posts")
+    author_name = db.Column(db.String, db.ForeignKey('author.username'))
+    author = db.relationship("Author", back_populates="posts")
 
     @property
     def slugified_title(self):

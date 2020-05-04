@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from flask_site.blog.models import Post
 from flask_site.universal_page.models import UniversalPage
 from flask_site.users import users
-from flask_site.users.models import User
+from flask_site.users.models import Author
 
 
 @users.route('/profile')
@@ -17,6 +17,6 @@ def user_profile():
 
 @users.route('/<username>')
 def user_posts(username):
-    user = User.query.filter_by(username=username).first_or_404()
-    user_posts = Post.query.filter_by(user_name=username)
-    return render_template('users/user_posts.html', user=user, user_posts=user_posts)
+    author = Author.query.filter_by(username=username).first_or_404()
+    author_posts = Post.query.filter_by(author_name=username)
+    return render_template('users/user_posts.html', author=author, author_posts=author_posts)

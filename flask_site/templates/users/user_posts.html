@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row equalize xs-equalize-auto">
                 <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 center-col margin-eight-bottom sm-margin-40px-bottom xs-margin-30px-bottom text-center last-paragraph-no-margin">
-                    <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase">{{user.firstname}} {{ user.lastname }}</h5>
+                    <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase">{{author.firstname}} {{ author.lastname }}</h5>
                     <p>page description </p>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row equalize xs-equalize-auto">
 
-            {% for post in user_posts %}
+            {% for post in author_posts %}
                 <div class="grid-item col-md-4 col-sm-6 col-xs-12 margin-30px-bottom xs-text-center wow fadeInUp">
                     <div class="blog-post bg-light-gray inner-match-height">
                         <div class="post-details padding-40px-all sm-padding-20px-all">
@@ -40,8 +40,8 @@
                             <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                             <div class="author">
                                 <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">
-                                    by <a href="{{ url_for('users.user_posts', username=post.user.username) }}" class="text-medium-gray">
-                                    {{post.user.username}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    by <a href="{{ url_for('users.user_posts', username=post.author.username) }}" class="text-medium-gray">
+                                    {{post.author.username}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                     {{ post.timestamp.strftime('%d.%m.%Y') }}
                                 </span>
                             </div>

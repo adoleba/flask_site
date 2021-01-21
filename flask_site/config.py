@@ -9,7 +9,7 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql:///flask"
+    SQLALCHEMY_DATABASE_URI = "postgres://adoleba:adminadmin@localhost/flask"
     DEBUG = True
 
 

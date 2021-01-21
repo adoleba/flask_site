@@ -29,7 +29,7 @@
                             <a href="{{ url_for('blog.post', year=post.timestamp.year, month='{:02d}'.format(post.timestamp.month),
                                 slug=post.slugified_title, id=post.id) }}"
                                 class="alt-font post-title text-medium text-extra-dark-gray width-100 display-block md-width-100 margin-15px-bottom">
-                                {{post.title}}
+                                {{ post.title }}
                             </a>
                             <p>
                                 {% if post.intro %}
@@ -41,7 +41,7 @@
                             <div class="separator-line-horrizontal-full bg-medium-gray margin-20px-tb"></div>
                             <div class="author">
                                 <span class="text-medium-gray text-uppercase text-extra-small display-inline-block sm-display-block sm-margin-10px-top">
-                                    by <a href="{{ url_for('users.user_posts', username=post.author.username) }}" class="text-medium-gray">{{post.author.username}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    by <a href="{{ url_for('users.user_posts', username=post.author.username) }}" class="text-medium-gray">{{ post.author.username }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                                     {{ post.timestamp.strftime('%d.%m.%Y') }}</span>
                             </div>
                         </div>

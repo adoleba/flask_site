@@ -6,10 +6,8 @@ from flask_mail import Message
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from flask_site import db, mail
-from flask_site.auth import auth
 from flask_site.auth.forms import RegisterForm, LoginForm, ForgotForm, PasswordResetForm
 from flask_site.common.views import PageView
-from flask_site.universal_page.models import UniversalPage
 from flask_site.users.models import Author
 
 
@@ -35,7 +33,7 @@ class Login(PageView):
         user = Author.query.filter_by(username=ctx['username']).first()
 
         if not user or not check_password_hash(user.password, ctx['password']):
-            flash('Please check your login details and try again.')
+            flash('Please check your login details and try again.', 'danger')
             return redirect(url_for('auth.login'))
 
         login_user(user)
@@ -100,54 +98,79 @@ class RegisteredView(PageView):
         return render_template("auth/registered.html", **ctx)
 
 
-@auth.route('/forgot', methods=["GET", "POST"])
-def forgot_password():
-    pages = UniversalPage.query.all()
-    form = ForgotForm()
+class ForgotPassword(PageView):
+    def get(self, ** kwargs):
+        ctx = self.get_context_data(**kwargs)
 
-    if form.validate_on_submit():
-        email = request.form['email']
-        user = Author.query.filter_by(email=email).first()
-        if user:
-            code = str(uuid.uuid4())
-            user.change_configuration = {
-                "password_reset_code": code
-            }
-            user.password_code = code
-            db.session.commit()
-            send_email(user)
+        ctx.update({
+            'form': ForgotForm()
+        })
 
-        flash('You will receive a password reset email if we find email in our system')
-    return render_template("auth/forgot_password.html", form=form, pages=pages)
+        return render_template("auth/forgot_password.html", **ctx)
+
+    def post(self, **kwargs):
+        ctx = self.get_context_data(**kwargs)
+
+        ctx.update({
+            'email': request.form['email'],
+            'form': ForgotForm(request.form),
+        })
+
+        if ctx['form'].validate_on_submit():
+            user = Author.query.filter_by(email=ctx['email']).first()
+            if user:
+                code = str(uuid.uuid4())
+                user.change_configuration = {
+                    "password_reset_code": code
+                }
+                user.password_code = code
+                db.session.commit()
+                send_email(user)
+
+            flash('You will receive a password reset email if we find email in our system')
+
+        return render_template("auth/forgot_password.html", **ctx)
 
 
-@auth.route('/password_reset/<username>/<code>', methods=["GET", "POST"])
-def reset_password(username, code):
-    pages = UniversalPage.query.all()
-    user = Author.query.filter_by(username=username).first()
-    form = PasswordResetForm()
+class ResetPassword(PageView):
+    def get(self, username, code, ** kwargs):
+        ctx = self.get_context_data(**kwargs)
 
-    if code == user.password_code:
+        ctx.update({
+            'form': PasswordResetForm(),
+            'user': Author.query.filter_by(username=username).first(),
+        })
 
-        if request.method == 'POST':
-            password = request.form['password']
+        if code == ctx['user'].password_code:
+            return render_template("auth/reset_password.html", **ctx)
 
-            if request.form['password'] != request.form['password2']:
-                flash('Passwords are not the same.')
-                password_compliance = False
-            else:
-                password_compliance = True
+        return render_template("auth/invalid_password_code.html", **ctx)
 
-            if password_compliance:
-                if form.validate_on_submit():
-                    user.password = generate_password_hash(password, method='sha256')
-                    user.password_code = ''
-                    db.session.commit()
-                    flash('Your password was changed. You can log in')
+    def post(self, username, **kwargs):
+        ctx = self.get_context_data(**kwargs)
 
-        return render_template("auth/reset_password.html", form=form, user=user)
+        ctx.update({
+            'user': Author.query.filter_by(username=username).first(),
+            'password': request.form['password'],
+            'password2': request.form['password2'],
+            'form': PasswordResetForm(request.form),
+        })
 
-    return render_template("auth/invalid_password_code.html", form=form, user=user, pages=pages)
+        if request.form['password'] != request.form['password2']:
+            flash('Passwords are not the same.')
+            password_compliance = False
+        else:
+            password_compliance = True
+
+        if password_compliance:
+            if ctx['form'].validate_on_submit():
+                ctx['user'].password = generate_password_hash(ctx['password'], method='sha256')
+                ctx['user'].password_code = ''
+                db.session.commit()
+                flash('Your password was changed. You can log in', 'info')
+                return redirect(url_for('auth.login'))
+
+        return render_template("auth/reset_password.html", **ctx)
 
 
 def send_email(user):

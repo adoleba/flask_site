@@ -13,11 +13,13 @@
                 <div class="row">
                     <div class="col-md-6 wow fadeIn center-col">
                         <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
-                            {% with messages = get_flashed_messages() %}
+                            {% with messages = get_flashed_messages(with_categories=true) %}
                             {% if messages %}
-                                <div class="alert alert-danger alert-dismissable">
-                                    {{ messages[0] }}
-                                </div>
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} alert-dismissable">
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
                             {% endif %}
                             {% endwith %}
 

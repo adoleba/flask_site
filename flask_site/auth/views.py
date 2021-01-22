@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from flask_site import db, mail
 from flask_site.auth import auth
-from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
+from flask_site.auth.forms import RegisterForm, LoginForm, ForgotForm, PasswordResetForm
 from flask_site.common.views import PageView
 from flask_site.universal_page.models import UniversalPage
 from flask_site.users.models import Author
@@ -50,34 +50,47 @@ def logout():
     return render_template("auth/logout.html", pages=pages)
 
 
-@auth.route('/signup', methods=["GET", "POST"])
-def signup():
-    form = SignupForm()
-    pages = UniversalPage.query.all()
+class Register(PageView):
 
-    if request.method == 'POST':
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
+    def get(self, ** kwargs):
+        ctx = self.get_context_data(**kwargs)
 
-        user_verify_email = Author.query.filter_by(email=email).first()
+        ctx.update({
+            'form': RegisterForm()
+        })
+
+        return render_template("auth/register.html", **ctx)
+
+    def post(self, **kwargs):
+        ctx = self.get_context_data(**kwargs)
+
+        ctx.update({
+            'email': request.form['email'],
+            'username': request.form['username'],
+            'password': request.form['password'],
+            'password2': request.form['password2'],
+            'form': RegisterForm(request.form),
+        })
+
+        if ctx['form'].validate_on_submit():
+            new_user = Author(email=ctx['email'], username=ctx['username'],
+                              password=generate_password_hash(ctx['password'], method='sha256'))
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('auth.registered'))
+
+        user_verify_email = Author.query.filter_by(email=ctx['email']).first()
         if user_verify_email:
             flash('Email address already exists.')
 
-        user_verify_username = Author.query.filter_by(username=username).first()
+        user_verify_username = Author.query.filter_by(username=ctx['username']).first()
         if user_verify_username:
             flash('Username already exists.')
 
         if request.form['password'] != request.form['password2']:
             flash('Passwords are not the same.')
 
-        if form.validate_on_submit():
-            new_user = Author(email=email, username=username, password=generate_password_hash(password, method='sha256'))
-            db.session.add(new_user)
-            db.session.commit()
-            return redirect(url_for('auth.registered'))
-
-    return render_template('auth/signup.html', form=form, pages=pages)
+        return render_template("auth/register.html", form=ctx['form'])
 
 
 @auth.route('/registered')

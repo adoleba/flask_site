@@ -4,7 +4,7 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Regexp, EqualTo, Email
 
 
-class SignupForm(FlaskForm):
+class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(3, 80), Regexp('^[A-Za-z0-9_]{3,}$',
         message='Usernames consist of numbers, letters and underscores')])
     password = PasswordField('Password', validators=[DataRequired(),

@@ -8,29 +8,38 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_site import db, mail
 from flask_site.auth import auth
 from flask_site.auth.forms import SignupForm, LoginForm, ForgotForm, PasswordResetForm
+from flask_site.common.views import PageView
 from flask_site.universal_page.models import UniversalPage
 from flask_site.users.models import Author
 
 
-@auth.route('/login', methods=["GET", "POST"])
-def login():
-    form = LoginForm()
-    pages = UniversalPage.query.all()
+class Login(PageView):
 
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    def get(self, ** kwargs):
+        ctx = self.get_context_data(**kwargs)
 
-        user = Author.query.filter_by(username=username).first()
+        ctx.update({
+            'form': LoginForm()
+        })
 
-        if not user or not check_password_hash(user.password, password):
+        return render_template("auth/login.html", **ctx)
+
+    def post(self, **kwargs):
+        ctx = self.get_context_data(**kwargs)
+
+        ctx.update({
+            'username': request.form['username'],
+            'password': request.form['password'],
+        })
+
+        user = Author.query.filter_by(username=ctx['username']).first()
+
+        if not user or not check_password_hash(user.password, ctx['password']):
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login'))
 
         login_user(user)
         return redirect(url_for('users.user_profile'))
-
-    return render_template("auth/login.html", form=form, pages=pages)
 
 
 @auth.route('/logout')

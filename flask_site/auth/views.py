@@ -42,12 +42,13 @@ class Login(PageView):
         return redirect(url_for('users.user_profile'))
 
 
-@auth.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    pages = UniversalPage.query.all()
-    return render_template("auth/logout.html", pages=pages)
+class Logout(PageView):
+
+    @login_required
+    def get(self, ** kwargs):
+        ctx = self.get_context_data(**kwargs)
+        logout_user()
+        return render_template("auth/logout.html", **ctx)
 
 
 class Register(PageView):
@@ -93,10 +94,10 @@ class Register(PageView):
         return render_template("auth/register.html", form=ctx['form'])
 
 
-@auth.route('/registered')
-def registered():
-    pages = UniversalPage.query.all()
-    return render_template('auth/registered.html', pages=pages)
+class RegisteredView(PageView):
+    def get(self, ** kwargs):
+        ctx = self.get_context_data(**kwargs)
+        return render_template("auth/registered.html", **ctx)
 
 
 @auth.route('/forgot', methods=["GET", "POST"])

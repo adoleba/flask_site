@@ -80,11 +80,6 @@ def create_app():
     from flask_site.main import views, models
     from flask_site.contact import views, models
     from flask_site.universal_page import views, models
-    from flask_site.common import filters
-
-    from flask_site.common.filters import subtract
-
-    app.jinja_env.filters['subtract'] = subtract
 
     @login_manager.user_loader
     def load_user(author_id):

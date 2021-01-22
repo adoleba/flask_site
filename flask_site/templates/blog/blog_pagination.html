@@ -1,6 +1,8 @@
 {% set second_last_page = posts.pages - 1 %}
-{% set next_page = posts.page + 1 %}
-{% set second_next_page = posts.page + 2 %}
+{% set current_page_plus_1 = posts.page + 1 %}
+{% set current_page_plus_2 = posts.page + 2 %}
+{% set current_page_minus_1 = posts.page - 1 %}
+{% set current_page_minus_2 = posts.page - 2 %}
 
 
 <div class=" text-center margin-30px-top sm-margin-20px-top wow fadeInUp">
@@ -18,7 +20,7 @@
             <li class="hidden-xs"><a href="?page=1">1</a></li>
 
             {% if posts.page == 3 %}
-                <li><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+                <li class="hidden-xs"><a href="?page={{ current_page_minus_1 }}">{{ current_page_minus_1 }}</a></li>
             {% endif %}
 
             {% if posts.page > 3 %}
@@ -26,8 +28,8 @@
                     <li class="active hidden-xs"><a>...</a></li>
                 {% endif %}
 
-                <li class="hidden-xs"><a href="?page={{ posts.page|subtract(2) }}">{{ posts.page|subtract(2) }}</a></li>
-                <li class="hidden-xs"><a href="?page={{ posts.page|subtract(1) }}">{{ posts.page|subtract(1) }}</a></li>
+                <li class="hidden-xs"><a href="?page={{ current_page_minus_2 }}">{{ current_page_minus_2 }}</a></li>
+                <li class="hidden-xs"><a href="?page={{ current_page_minus_1 }}">{{ current_page_minus_1 }}</a></li>
 
             {% endif %}
 
@@ -36,15 +38,14 @@
         <li class="active"><a>{{ posts.page }}</a></li>
 
         {% if posts.has_next %}
-            {% if next_page < posts.pages %}
-                <!--ifek wydaje się zbędny, ale konieczny, żeby nie wysypało się przy przedostaniej stronie -->
+            {% if current_page_plus_1 < posts.pages %}
 
-                <li  class="hidden-xs"><a href="?page={{ next_page }}">{{ next_page }}</a></li>
+                <li  class="hidden-xs"><a href="?page={{ current_page_plus_1 }}">{{ current_page_plus_1 }}</a></li>
 
-                {% if second_next_page <= second_last_page %}
-                    <li  class="hidden-xs"><a href="?page={{ second_next_page }}">{{ second_next_page }}</a></li>
+                {% if current_page_plus_2 <= second_last_page %}
+                    <li  class="hidden-xs"><a href="?page={{ current_page_plus_2 }}">{{ current_page_plus_2 }}</a></li>
 
-                    {% if second_next_page != second_last_page %}
+                    {% if current_page_plus_2 != second_last_page %}
                         <li class="active hidden-xs"><a>...</a></li>
                     {% endif %}
 

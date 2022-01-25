@@ -30,29 +30,5 @@
         </div>
     </section>
 
-    <section class="wow fadeIn bg-light-gray">
-        <div class="container">
-            <form action="." method="post">
-                {{ form.hidden_tag()}}
-                <div class="row">
-                    <div class="col-md-6 wow fadeIn center-col">
-                        <div class="padding-fifteen-all bg-white border-radius-6 md-padding-seven-all">
-                            <div class="input-bg">
-                                Name:<br />
-                                {{ form.name }}
-                                E-mail:<br />
-                                {{ form.email}}
-                                Subject:<br />
-                                {{ form.subject }}
-                                Message<br />
-                                {{ form.body(rows="10") }}<br />
-                                <button type="submit" class="btn btn-small border-radius-4 btn-black">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
 
 {% endblock %}

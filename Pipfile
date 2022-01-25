@@ -21,6 +21,7 @@ werkzeug = "==0.16.1"
 psycopg2 = "==2.8.5"
 gunicorn = "==20.0.4"
 email-validator = "==1.1.2"
+importlib-resources = "*"
 
 [requires]
 python_version = "3.7"
